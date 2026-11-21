@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>צילינדר מנעולנות</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;800&family=Amatic+SC:wght@700&display=swap">
+<style>
+/* Layout: a street flyer taped to a concrete pole — one yellow sticker, a handwritten note, a price scrap, tear-off phone tabs.
+   Deliberately single-theme: the look is a physical poster, so every color is set explicitly. */
+:root{
+  --concrete:#C9C6BF; --concrete-dark:#B5B1A9; --sticker:#FFD21F; --ink:#141414;
+  --paper:#FBFAF5; --rule:#BFD3E6; --pen:#1F3A8A; --tape:rgba(236,228,200,.82);
+  --display:"Secular One","Assistant",system-ui,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --hand:"Amatic SC","Assistant",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--concrete);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.05) 0 1px,transparent 2px),
+    radial-gradient(circle at 70% 80%,rgba(255,255,255,.18) 0 1px,transparent 2px),
+    linear-gradient(180deg,var(--concrete),var(--concrete-dark));
+  background-size:7px 7px,11px 11px,100% 100%;}
+.wall{max-width:900px;margin:0 auto;padding-block:40px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:56px}
+h1,h2{margin:0;font-family:var(--display);font-weight:400;line-height:1;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--pen);outline-offset:3px}
+
+.tape{position:absolute;width:110px;height:30px;background:var(--tape);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+
+/* the sticker */
+.sticker{position:relative;background:var(--sticker);padding:44px 40px 36px;transform:rotate(-1.6deg);
+  box-shadow:0 2px 0 rgba(0,0,0,.08),0 18px 30px -18px rgba(0,0,0,.45);
+  animation:slap .5s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes slap{from{transform:rotate(-4deg) scale(1.04)}to{transform:rotate(-1.6deg) scale(1)}}
+.sticker .tape{top:-14px;right:40px;transform:rotate(4deg)}
+.sticker .tape.l{right:auto;left:30px;transform:rotate(-6deg)}
+.sticker h1{font-size:clamp(56px,11vw,112px);letter-spacing:-.01em}
+.sticker .sub{font-size:clamp(20px,3vw,26px);font-weight:600;margin-top:10px}
+.bignum{display:block;font-family:var(--display);font-size:clamp(46px,10vw,104px);direction:ltr;text-align:right;
+  line-height:1;margin-top:22px;color:var(--ink);text-decoration:none;letter-spacing:.01em}
+.bignum:hover{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:10px}
+.stamp{display:inline-block;margin-top:18px;border:3px solid var(--ink);padding:4px 14px;font-weight:800;font-size:18px;transform:rotate(1deg)}
+
+/* handwritten note */
+.note{position:relative;background:var(--paper);padding:40px 40px 34px;max-width:620px;margin-inline-start:auto;transform:rotate(1.2deg);
+  background-image:repeating-linear-gradient(180deg,transparent 0 33px,var(--rule) 33px 34px);background-position:0 26px;
+  box-shadow:0 14px 24px -16px rgba(0,0,0,.5)}
+.note .tape{top:-12px;left:50%;margin-left:-55px;transform:rotate(-2deg)}
+.note h2{font-family:var(--hand);font-size:52px;color:var(--pen);line-height:1}
+.note p{font-size:19px;line-height:34px;margin-top:8px}
+.note .sig{font-family:var(--hand);font-size:40px;color:var(--pen);margin-top:10px;line-height:1}
+
+/* price scrap */
+.scrap{position:relative;background:var(--paper);padding:34px 36px 30px;max-width:460px;transform:rotate(-2.2deg);
+  box-shadow:0 14px 24px -16px rgba(0,0,0,.5);
+  clip-path:polygon(0 2%,6% 0,14% 1.5%,25% 0,38% 1.8%,52% .3%,66% 1.6%,80% 0,92% 1.4%,100% 0,100% 100%,0 100%)}
+.scrap h2{font-family:var(--hand);font-size:48px;color:var(--pen)}
+.scrap ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.scrap li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;border-bottom:1px dashed #C9C4B4;padding-bottom:8px}
+.scrap li b{font-family:var(--hand);font-size:34px;color:var(--pen);white-space:nowrap;direction:ltr;line-height:1}
+.scrap small{display:block;font-size:15px;color:#5C5A52;margin-top:12px}
+
+/* questions — plain, like someone talking */
+.qa{display:grid;gap:26px;max-width:640px}
+.qa h2{font-size:clamp(40px,6vw,56px)}
+.qa div{border-inline-start:6px solid var(--ink);padding-inline-start:18px}
+.qa h3{margin:0;font-size:21px;font-weight:800}
+.qa p{margin-top:4px;color:#2A2A28}
+
+/* tear-off flyer */
+.flyer{background:var(--paper);box-shadow:0 14px 24px -16px rgba(0,0,0,.5);transform:rotate(.6deg);position:relative}
+.flyer .tape{top:-12px;right:30px;transform:rotate(3deg)}
+.flyer-top{padding:30px 32px 22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:end}
+.flyer-top h2{font-size:clamp(34px,5vw,48px)}
+.flyer-top p{color:#4B4A44;font-size:16px}
+.tabs{display:flex;border-top:2px dashed #9F9B90;overflow:hidden}
+.tab{flex:1;min-width:0;border:0;border-inline-start:2px dashed #9F9B90;background:var(--paper);color:var(--ink);cursor:pointer;
+  font:600 16px/1.2 var(--body);writing-mode:vertical-rl;padding:16px 0;height:190px;display:flex;align-items:center;justify-content:center;
+  transition:transform .55s cubic-bezier(.5,0,.75,0),opacity .55s}
+.tab:first-child{border-inline-start:0}
+.tab span{direction:ltr;unicode-bidi:isolate;font-family:var(--display);font-weight:400;font-size:19px;margin-top:6px}
+.tab:hover{background:#FFF8D6}
+.tab.torn{transform:translateY(130px) rotate(14deg);opacity:0;pointer-events:none}
+.flyer-msg{min-height:24px;padding:10px 32px 18px;font-size:15px;color:#4B4A44}
+
+footer{font-size:14px;color:#3E3C37;text-align:center}
+
+@media (max-width:560px){
+  body{font-size:17px}
+  .sticker{padding:36px 22px 28px}
+  .note,.scrap{padding:34px 22px 28px}
+  .flyer-top{padding:26px 20px 18px}
+  .flyer-msg{padding-inline:20px}
+  .tab{height:160px;font-size:14px}
+  .tab span{font-size:16px}
+  .tab:nth-child(n+6){display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wall" dir="rtl" lang="he">
+
+  <header class="sticker">
+    <span class="tape" aria-hidden="true"></span><span class="tape l" aria-hidden="true"></span>
+    <h1>ננעלתם בחוץ?</h1>
+    <p class="sub">אבי, מנעולן ברמת גן, גבעתיים ובני ברק. עונה גם בלילה.</p>
+    <a class="bignum" href="tel:0500000000">050-000-0000</a>
+    <span class="stamp">לא נפתח? לא משלמים</span>
+  </header>
+
+  <section class="note" aria-labelledby="hi">
+    <span class="tape" aria-hidden="true"></span>
+    <h2 id="hi">היי, אני אבי</h2>
+    <p>אני פותח דלתות בשכונה הרבה שנים. רוב מי שמתקשר אליי יצא לזרוק את הזבל, והדלת נטרקה לו מאחורה. קורה לכולם, אז אין מה להתבייש.</p>
+    <p>בטלפון אשאל איזו דלת יש לכם ואגיד כמה זה יעלה. כשאגיע אבקש לראות תעודה או חשבון חשמל עם הכתובת, כדי לדעת שזה באמת הבית שלכם.</p>
+    <p class="sig">אבי</p>
+  </section>
+
+  <section class="scrap" aria-labelledby="prices">
+    <h2 id="prices">כמה זה עולה</h2>
+    <ul>
+      <li><span>פתיחת דלת ביום</span><b>₪280</b></li>
+      <li><span>פתיחת דלת בלילה או בשבת</span><b>₪400</b></li>
+      <li><span>החלפת צילינדר כולל 5 מפתחות</span><b>₪250</b></li>
+      <li><span>צילינדר מוגן נגד פריצה</span><b>₪550</b></li>
+    </ul>
+    <small>אם סיכמנו מחיר בטלפון, זה מה שתשלמו, כולל ההגעה.</small>
+  </section>
+
+  <section class="qa" aria-labelledby="qa">
+    <h2 id="qa">מה שואלים אותי בטלפון</h2>
+    <div><h3>תשבור לי את הדלת?</h3><p>כמעט אף פעם. רוב הדלתות נפתחות בלי נזק, גם פלדלת. אם בכל זאת צריך לקדוח את הצילינדר, אגיד לכם לפני ואביא איתי חדש.</p></div>
+    <div><h3>תוך כמה זמן אתה מגיע?</h3><p>תלוי איפה אני נמצא באותו רגע. אגיד לכם בטלפון כמה זמן זה ייקח, גם אם זה 40 דקות.</p></div>
+    <div><h3>עברתי דירה. צריך להחליף מנעול?</h3><p>כן. אין לכם מושג למי עוד יש מפתח, והחלפת צילינדר לוקחת בערך עשר דקות.</p></div>
+    <div><h3>הילד ננעל בפנים לבד</h3><p>תגידו לי את זה במשפט הראשון, ואני יוצא אליכם לפני כל קריאה אחרת.</p></div>
+  </section>
+
+  <section class="flyer" aria-labelledby="tear">
+    <span class="tape" aria-hidden="true"></span>
+    <div class="flyer-top">
+      <h2 id="tear">קחו פתק, למקרה ש...</h2>
+      <p>לחיצה על פתק מעתיקה את המספר</p>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <p class="flyer-msg" id="flyerMsg" aria-live="polite"></p>
+  </section>
+
+  <footer>דף לדוגמה. אבי, המספר והמחירים בדף אינם אמיתיים.</footer>
+</div>
+
+<script>
+(() => {
+  const num = "050-000-0000";
+  const tabs = document.getElementById("tabs");
+  const msg = document.getElementById("flyerMsg");
+  for (let i = 0; i < 8; i++) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "tab";
+    b.setAttribute("aria-label", "העתקת המספר " + num);
+    b.innerHTML = 'אבי מנעולן <span>' + num + '</span>';
+    if (i === 2 || i === 5) b.classList.add("torn");   // a couple already taken, like a real flyer
+    b.addEventListener("click", () => {
+      b.classList.add("torn");
+      const ok = () => { msg.textContent = "המספר הועתק: " + num; };
+      const fail = () => { msg.textContent = "המספר: " + num; };
+      try { navigator.clipboard.writeText(num).then(ok, fail); } catch (e) { fail(); }
+      if (![...tabs.children].some(t => !t.classList.contains("torn") && getComputedStyle(t).display !== "none")) {
+        setTimeout(() => { tabs.querySelectorAll(".tab").forEach(t => t.classList.remove("torn")); msg.textContent += " · תליתי פתקים חדשים"; }, 900);
+      }
+    });
+    tabs.append(b);
+  }
+})();
+</script>
+</body>
+</html>
