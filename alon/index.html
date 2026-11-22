@@ -102,6 +102,10 @@ fieldset{border:0;margin:0;padding:0}
 
 .final{background:var(--blue);color:#fff;border-radius:8px;padding:48px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
 .final h2{font-size:clamp(56px,8vw,96px)}
+.final p{margin-top:8px;opacity:.85;font-size:18px}
+.slot{border:2px dashed var(--ink);border-radius:6px;padding:28px;display:grid;gap:8px}
+.slot h2{font-size:clamp(44px,6vw,64px)}
+.slot p{color:var(--muted)}
 .final .btn{background:#fff;color:var(--blue)}
 footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:2px solid var(--ink);z-index:9}
@@ -121,8 +125,8 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   <header class="hero">
     <div>
       <p class="tag">PERSONAL TRAINER · TEL AVIV</p>
-      <h1>50 דקות.<br><em>בלי מנוי.</em></h1>
-      <p class="lede">אימון אישי בפארק הירקון או אצלכם בסלון. אני מביא את הציוד, אתם מביאים מים ונעליים.</p>
+      <h1>מאמן אישי<br><em>בתל אביב.</em></h1>
+      <p class="lede">50 דקות, בלי מנוי: בפארק הירקון או אצלכם בסלון. אני מביא את הציוד, אתם מביאים מים ונעליים.</p>
       <div class="row">
         <a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">לקבוע אימון ניסיון</a>
         <a class="btn line" href="#plan">לבנות תוכנית שבועית</a>
@@ -171,6 +175,10 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
+    <div class="slot"><p class="tag">RESULTS</p><h2>מה אומרים המתאמנים</h2><p>כאן ייכנסו ביקורות אמיתיות עם שם, ותוצאות שהמתאמנים אישרו לפרסם. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
+  </section>
+
+  <section>
     <div class="where">
       <div><h3>בפארק</h3><p>פארק הירקון, ליד גני יהושע. בבוקר מוקדם ובערב.</p></div>
       <div><h3>אצלכם</h3><p>מספיק מקום של מזרן אחד. רמת אביב, צפון הישן ורמת החייל.</p></div>
@@ -178,7 +186,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
-    <div class="final"><h2>אימון ניסיון ב-₪100</h2><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
+    <div class="final"><div><h2>אימון ניסיון ב-₪100</h2><p>עונה בוואטסאפ עד הערב, וקובעים יחד יום לאימון.</p></div><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
   </section>
 </div>
 <footer><div class="wrap">דף לדוגמה. אלון, המספר והמחירים אינם אמיתיים.</div></footer>
@@ -232,6 +240,23 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   };
   form.addEventListener("change", render); render();
 })();
+</script>
+<!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->
+<script>
+window.GA_ID = "";
+(function () {
+  var id = window.GA_ID; if (!id) return;
+  var s = document.createElement("script"); s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag("js", new Date()); gtag("config", id);
+})();
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+  if (!a || !window.gtag) return;
+  gtag("event", a.href.indexOf("tel:") === 0 ? "click_call" : "click_whatsapp", { link_url: a.href });
+});
 </script>
 </body>
 </html>

@@ -69,6 +69,10 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .range{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--bg);border-radius:12px;padding:12px 14px}
 .range b{font-family:var(--mono);font-size:20px;direction:ltr}
 .result .call{justify-content:center}
+.result .after{font-size:15px;color:var(--muted);text-align:center}
+.slot{border:2px dashed var(--line);border-radius:16px;padding:28px;display:grid;gap:8px;background:var(--surface)}
+.slot h2{font-size:clamp(28px,4vw,40px)}
+.slot p{color:var(--muted)}
 .fade{animation:fade .35s ease}
 @keyframes fade{from{transform:translateY(6px)}}
 
@@ -109,8 +113,8 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   <header class="hero">
     <div>
       <span class="anno">LIC. PLUMBER · ⌀½" – ⌀4"</span>
-      <h1>מים במקום שהם לא אמורים להיות?</h1>
-      <p class="lede">אינסטלטור מוסמך בחולון, בת ים וראשון לציון. בחרו מה קורה אצלכם, ותדעו מה לעשות עכשיו ועד כמה זה דחוף.</p>
+      <h1>אינסטלטור בחולון ובת ים. מגיעים היום.</h1>
+      <p class="lede">אינסטלטור מוסמך, גם בראשון לציון ובאזור. בחרו מה קורה אצלכם, ותדעו מה לעשות עכשיו ועד כמה זה דחוף.</p>
       <svg class="pipes" viewBox="0 0 460 210" aria-hidden="true">
         <path class="pipe" d="M10 40 H200 a30 30 0 0 1 30 30 V140 a30 30 0 0 0 30 30 H420"/>
         <path class="flow" d="M10 40 H200 a30 30 0 0 1 30 30 V140 a30 30 0 0 0 30 30 H420"/>
@@ -144,6 +148,10 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
         <tr><td>תיקון דוד שמש או חשמלי</td><td>שעה</td><td>₪300–550</td></tr>
         <tr><td>איתור נזילה במצלמה תרמית</td><td>שעה עד שעתיים</td><td>₪600–900</td></tr>
       </tbody></table></div>
+  </section>
+
+  <section>
+    <div class="slot"><span class="anno">REVIEWS</span><h2>מה אומרים הלקוחות</h2><p>כאן ייכנסו ביקורות אמיתיות מגוגל, ותמונות של עבודות לפני ואחרי. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
   </section>
 
   <section>
@@ -189,7 +197,8 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
     res.innerHTML = `<span class="lvl ${d.u ? "u" : "c"}">${d.lvl}</span>
       <h3>מה לעשות עד שאגיע</h3><ol>${d.steps.map(s => `<li>${s}</li>`).join("")}</ol>
       <div class="range"><span>טווח מחיר משוער</span><b>${d.price}</b></div>
-      <a class="call" href="tel:0500000000">${d.u ? "להתקשר עכשיו" : "לתאם ביקור"} <b>050-000-0000</b></a>`;
+      <a class="call" href="tel:0500000000">${d.u ? "להתקשר עכשיו" : "לתאם ביקור"} <b>050-000-0000</b></a>
+      <p class="after">אם לא עניתי, אני חוזר אליכם תוך 15 דקות.</p>`;
     res.classList.remove("fade"); res.offsetHeight; res.classList.add("fade");
   };
   data.forEach((d, i) => {
@@ -201,6 +210,23 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   });
   show(0);
 })();
+</script>
+<!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->
+<script>
+window.GA_ID = "";
+(function () {
+  var id = window.GA_ID; if (!id) return;
+  var s = document.createElement("script"); s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag("js", new Date()); gtag("config", id);
+})();
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+  if (!a || !window.gtag) return;
+  gtag("event", a.href.indexOf("tel:") === 0 ? "click_call" : "click_whatsapp", { link_url: a.href });
+});
 </script>
 </body>
 </html>

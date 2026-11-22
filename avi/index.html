@@ -19,7 +19,7 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--concrete);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;
+body{background:var(--concrete);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;
   background-image:
     radial-gradient(circle at 20% 30%,rgba(0,0,0,.05) 0 1px,transparent 2px),
     radial-gradient(circle at 70% 80%,rgba(255,255,255,.18) 0 1px,transparent 2px),
@@ -46,6 +46,10 @@ p{margin:0}
 .bignum{display:block;font-family:var(--display);font-size:clamp(46px,10vw,104px);direction:ltr;text-align:right;
   line-height:1;margin-top:22px;color:var(--ink);text-decoration:none;letter-spacing:.01em}
 .bignum:hover{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:10px}
+.sticker .after{font-weight:600;font-size:17px;margin-top:12px}
+.proof{border:3px dashed var(--ink);padding:28px;max-width:620px;transform:rotate(-.8deg);background:rgba(251,250,245,.55)}
+.proof h2{font-family:var(--hand);font-size:48px;color:var(--pen);line-height:1}
+.proof p{margin-top:8px}
 .stamp{display:inline-block;margin-top:18px;border:3px solid var(--ink);padding:4px 14px;font-weight:800;font-size:18px;transform:rotate(1deg)}
 
 /* handwritten note */
@@ -105,7 +109,7 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
+<body style="margin:0">
 
 <div class="wall" dir="rtl" lang="he">
 
@@ -114,6 +118,7 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
     <h1>ננעלתם בחוץ?</h1>
     <p class="sub">אבי, מנעולן ברמת גן, גבעתיים ובני ברק. עונה גם בלילה.</p>
     <a class="bignum" href="tel:0500000000">050-000-0000</a>
+    <p class="after">עונה בעצמי. אם אני באמצע עבודה, חוזר אליכם תוך 10 דקות.</p>
     <span class="stamp">לא נפתח? לא משלמים</span>
   </header>
 
@@ -142,6 +147,11 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
     <div><h3>תוך כמה זמן אתה מגיע?</h3><p>תלוי איפה אני נמצא באותו רגע. אגיד לכם בטלפון כמה זמן זה ייקח, גם אם זה 40 דקות.</p></div>
     <div><h3>עברתי דירה. צריך להחליף מנעול?</h3><p>כן. אין לכם מושג למי עוד יש מפתח, והחלפת צילינדר לוקחת בערך עשר דקות.</p></div>
     <div><h3>הילד ננעל בפנים לבד</h3><p>תגידו לי את זה במשפט הראשון, ואני יוצא אליכם לפני כל קריאה אחרת.</p></div>
+  </section>
+
+  <section class="proof" aria-labelledby="proofh">
+    <h2 id="proofh">מה אומרים השכנים</h2>
+    <p>כאן ייכנסו ביקורות אמיתיות עם שם ושכונה, ותמונות של דלתות שפתחתי. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p>
   </section>
 
   <section class="flyer" aria-labelledby="tear">
@@ -180,6 +190,23 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
     tabs.append(b);
   }
 })();
+</script>
+<!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->
+<script>
+window.GA_ID = "";
+(function () {
+  var id = window.GA_ID; if (!id) return;
+  var s = document.createElement("script"); s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag("js", new Date()); gtag("config", id);
+})();
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+  if (!a || !window.gtag) return;
+  gtag("event", a.href.indexOf("tel:") === 0 ? "click_call" : "click_whatsapp", { link_url: a.href });
+});
 </script>
 </body>
 </html>

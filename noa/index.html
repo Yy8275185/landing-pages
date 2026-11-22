@@ -64,6 +64,9 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .item p{grid-column:1/-1;color:var(--muted);font-size:16.5px}
 .item .dur{font-size:14px;font-weight:700;color:var(--rose);margin-inline-start:10px;font-family:var(--body)}
 
+.slot{border:2px dashed var(--line);border-radius:24px;padding:30px;max-width:760px;display:grid;gap:8px}
+.slot h2{font-size:clamp(32px,4vw,44px)}
+.slot p{color:var(--muted)}
 /* booking */
 .book{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
 .book > *{min-width:0}
@@ -130,8 +133,11 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
       <div class="item"><h3>ניקוי עמוק<span class="dur">90 דק׳</span></h3><span class="price">₪380</span><p>לעור שמן או עם נטייה לפצעונים. כולל אדים ומסכת חימר.</p></div>
       <div class="item"><h3>טיפול לעור רגיש<span class="dur">60 דק׳</span></h3><span class="price">₪300</span><p>לעור אדמומי או מגורה. מוצרים בלי בישום ובלי שפשוף.</p></div>
       <div class="item"><h3>פילינג כימי עדין<span class="dur">45 דק׳</span></h3><span class="price">₪260</span><p>לכתמים ולמרקם לא אחיד. מומלץ בסדרה של ארבעה, בחודשי החורף.</p></div>
-      <div class="item"><h3>עיצוב גבות<span class="dur">20 דק׳</span></h3><span class="price">₪80</span><p>בשעווה או בפינצטה, לפי מה שנוח לך.</p></div>
     </div>
+  </section>
+
+  <section>
+    <div class="slot"><p class="kicker">לפני ואחרי</p><h2>מה אומרות המטופלות</h2><p>כאן ייכנסו ביקורות אמיתיות עם שם פרטי, ותמונות לפני ואחרי באישור המטופלות. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
   </section>
 
   <section id="book">
@@ -176,7 +182,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 
 <script>
 (() => {
-  const T = ["טיפול פנים קלאסי","ניקוי עמוק","טיפול לעור רגיש","פילינג כימי עדין","עיצוב גבות"];
+  const T = ["טיפול פנים קלאסי","ניקוי עמוק","טיפול לעור רגיש","פילינג כימי עדין"];
   const D = ["ראשון","שני","שלישי","רביעי","חמישי"];
   const H = ["בוקר","צהריים","ערב"];
   const build = (id, name, arr, def) => {
@@ -199,6 +205,23 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   };
   form.addEventListener("change", update); update();
 })();
+</script>
+<!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->
+<script>
+window.GA_ID = "";
+(function () {
+  var id = window.GA_ID; if (!id) return;
+  var s = document.createElement("script"); s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag("js", new Date()); gtag("config", id);
+})();
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+  if (!a || !window.gtag) return;
+  gtag("event", a.href.indexOf("tel:") === 0 ? "click_call" : "click_whatsapp", { link_url: a.href });
+});
 </script>
 </body>
 </html>
