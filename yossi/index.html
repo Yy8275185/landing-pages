@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>יוסי אינסטלציה</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Assistant:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a plumbing schematic — copper pipes with running water frame a triage panel ("what's happening at your place?"), then prices and service area */
+:root{
+  --bg:#EEF3F6; --surface:#FFFFFF; --ink:#10283A; --muted:#566B7B; --line:#CFDBE3; --grid:rgba(30,136,199,.09);
+  --water:#1E88C7; --copper:#B8622E; --urgent:#D23B2B; --calm:#2F8A5B;
+  --display:"Rubik","Assistant",system-ui,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F06A5A; --calm:#5CC48D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F06A5A; --calm:#5CC48D; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.65;overflow-x:hidden;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--water);outline-offset:3px;border-radius:6px}
+.anno{font-family:var(--mono);font-size:12.5px;color:var(--copper);direction:ltr;display:inline-block}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
+.brand{font-family:var(--display);font-weight:800;font-size:26px;display:flex;align-items:center;gap:10px}
+.brand svg{width:30px;height:30px}
+.call{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--bg);text-decoration:none;border-radius:10px;padding:12px 18px;font-weight:700}
+.call b{font-family:var(--mono);direction:ltr}
+
+.hero{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:40px;padding-block:24px 70px;align-items:start}
+.hero > *{min-width:0}
+.hero h1{font-size:clamp(44px,6.5vw,78px)}
+.hero .lede{font-size:20px;color:var(--muted);margin-top:16px;max-width:38ch}
+.pipes{width:100%;height:auto;margin-top:26px;max-width:460px;display:block}
+.pipes .pipe{fill:none;stroke:var(--copper);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+.pipes .flow{fill:none;stroke:var(--water);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14 18;animation:flow 1.6s linear infinite}
+.pipes .joint{fill:var(--copper)}
+.pipes text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.drop{fill:var(--water);animation:drip 2.2s cubic-bezier(.5,0,1,1) infinite}
+@keyframes flow{to{stroke-dashoffset:-64}}
+@keyframes drip{0%{transform:translateY(0);opacity:1}80%{transform:translateY(34px);opacity:1}100%{transform:translateY(38px);opacity:0}}
+
+/* triage */
+.triage{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 30px 60px -44px rgba(16,40,58,.6)}
+.triage h2{font-size:30px}
+.triage > p{color:var(--muted);margin-top:4px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.opt{font:700 16.5px/1.3 var(--body);text-align:start;padding:14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:center;transition:border-color .2s,transform .2s}
+.opt:hover{transform:translateY(-2px)}
+.opt[aria-pressed="true"]{border-color:var(--water);background:color-mix(in srgb,var(--water) 10%,var(--surface))}
+.opt svg{width:26px;height:26px;flex:none;stroke:var(--water);fill:none;stroke-width:1.8}
+.result{margin-top:20px;border-top:1px dashed var(--line);padding-top:18px;display:grid;gap:12px}
+.lvl{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:4px 12px;border-radius:99px;width:max-content}
+.lvl.u{background:color-mix(in srgb,var(--urgent) 14%,transparent);color:var(--urgent)}
+.lvl.c{background:color-mix(in srgb,var(--calm) 14%,transparent);color:var(--calm)}
+.lvl::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.result h3{font-size:20px;font-family:var(--body)}
+.result ol{margin:0;padding-inline-start:20px;display:grid;gap:4px}
+.range{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--bg);border-radius:12px;padding:12px 14px}
+.range b{font-family:var(--mono);font-size:20px;direction:ltr}
+.result .call{justify-content:center}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{transform:translateY(6px)}}
+
+section{padding-block:70px;border-top:1px solid var(--line)}
+.head{display:grid;gap:8px;margin-bottom:32px;max-width:680px}
+.head h2{font-size:clamp(34px,4.6vw,52px)}
+.head p{color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:520px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+th,td{text-align:start;padding:15px 18px;border-bottom:1px solid var(--line)}
+thead th{font-size:14px;color:var(--muted);font-weight:600}
+tbody tr:last-child td{border-bottom:0}
+td:last-child{font-family:var(--mono);direction:ltr;text-align:end;white-space:nowrap}
+.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promise div{border-top:3px solid var(--copper);padding-top:12px}
+.promise h3{font-size:22px}
+.promise p{color:var(--muted);font-size:16.5px;margin-top:4px}
+.areas{display:flex;flex-wrap:wrap;gap:8px}
+.areas span{background:var(--surface);border:1px solid var(--line);padding:6px 14px;border-radius:8px}
+footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--ink);z-index:9}
+.mbar .call{width:100%;justify-content:center;background:var(--water);color:#fff}
+
+@media (max-width:900px){.hero{grid-template-columns:1fr}.pipes{display:none}.promise{grid-template-columns:1fr}}
+@media (max-width:560px){.opts{grid-template-columns:1fr}.mbar{display:block}nav .call{display:none}.triage{padding:20px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body style="margin:0">
+
+<div dir="rtl" lang="he">
+<div class="wrap">
+  <nav>
+    <span class="brand"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M4 8h10a4 4 0 0 1 4 4v10" fill="none" stroke="var(--copper)" stroke-width="4" stroke-linecap="round"/><path d="M18 26c-2.5 0-4-1.7-4-3.6 0-2 4-6.4 4-6.4s4 4.4 4 6.4c0 1.9-1.5 3.6-4 3.6z" fill="var(--water)"/></svg>יוסי אינסטלציה</span>
+    <a class="call" href="tel:0500000000">חיוג <b>050-000-0000</b></a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <span class="anno">LIC. PLUMBER · ⌀½" – ⌀4"</span>
+      <h1>מים במקום שהם לא אמורים להיות?</h1>
+      <p class="lede">אינסטלטור מוסמך בחולון, בת ים וראשון לציון. בחרו מה קורה אצלכם, ותדעו מה לעשות עכשיו ועד כמה זה דחוף.</p>
+      <svg class="pipes" viewBox="0 0 460 210" aria-hidden="true">
+        <path class="pipe" d="M10 40 H200 a30 30 0 0 1 30 30 V140 a30 30 0 0 0 30 30 H420"/>
+        <path class="flow" d="M10 40 H200 a30 30 0 0 1 30 30 V140 a30 30 0 0 0 30 30 H420"/>
+        <path class="pipe" d="M330 170 V110"/>
+        <path class="flow" d="M330 170 V110"/>
+        <rect class="joint" x="190" y="30" width="16" height="20" rx="3"/>
+        <rect class="joint" x="322" y="160" width="16" height="20" rx="3"/>
+        <rect class="joint" x="318" y="98" width="24" height="14" rx="3"/>
+        <path class="drop" d="M330 122c-3 0-5-2-5-4.5 0-2.5 5-8.5 5-8.5s5 6 5 8.5c0 2.5-2 4.5-5 4.5z"/>
+        <text x="20" y="26">⌀¾" · 3 bar</text>
+        <text x="350" y="104">ברזון ניל</text>
+      </svg>
+    </div>
+
+    <div class="triage" id="triage">
+      <h2>מה קורה אצלכם?</h2>
+      <p>בחרו את מה שהכי קרוב.</p>
+      <div class="opts" id="opts"></div>
+      <div class="result" id="result" aria-live="polite"></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="head"><span class="anno">PRICE LIST</span><h2>מחירים</h2><p>המחיר נסגר בטלפון אחרי שתתארו את התקלה. אם בשטח מתברר שיש עבודה נוספת, אני עוצר ושואל לפני שממשיכים.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>עבודה</th><th>כמה זמן</th><th>מחיר</th></tr></thead>
+      <tbody>
+        <tr><td>פתיחת סתימה בכיור או באמבטיה</td><td>חצי שעה</td><td>₪250–350</td></tr>
+        <tr><td>פתיחת סתימה בשירותים</td><td>חצי שעה עד שעה</td><td>₪300–450</td></tr>
+        <tr><td>החלפת ברז או ברזון ניל</td><td>חצי שעה</td><td>₪200–320</td></tr>
+        <tr><td>תיקון דוד שמש או חשמלי</td><td>שעה</td><td>₪300–550</td></tr>
+        <tr><td>איתור נזילה במצלמה תרמית</td><td>שעה עד שעתיים</td><td>₪600–900</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section>
+    <div class="head"><h2>איך אני עובד</h2></div>
+    <div class="promise">
+      <div><h3>נעלי בית מעל הנעליים</h3><p>ויריעה על הרצפה לפני שפותחים משהו מתחת לכיור.</p></div>
+      <div><h3>חלק ישן חוזר אליכם</h3><p>כל חלק שהחלפתי נשאר אצלכם, כדי שתראו מה היה התקול.</p></div>
+      <div><h3>חשבונית ואחריות</h3><p>שנה אחריות על עבודה וחלקים, בחשבונית מסודרת.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>אזורי שירות</h2></div>
+    <div class="areas"><span>חולון</span><span>בת ים</span><span>ראשון לציון</span><span>אזור</span><span>יפו</span><span>נס ציונה</span></div>
+  </section>
+</div>
+<footer><div class="wrap">דף לדוגמה. יוסי, המספר והמחירים אינם אמיתיים.</div></footer>
+<div class="mbar"><a class="call" href="tel:0500000000">חיוג ליוסי <b>050-000-0000</b></a></div>
+</div>
+
+<script>
+(() => {
+  const icon = {
+    ceiling:'<path d="M3 5h18M7 5v4m10-4v4"/><path d="M12 11c-2 2.6-3 4.2-3 5.4a3 3 0 0 0 6 0c0-1.2-1-2.8-3-5.4z"/>',
+    clog:'<path d="M4 10h16l-2 8H6z"/><path d="M12 10v-4m-3 1h6"/><circle cx="12" cy="14" r="1.6"/>',
+    heater:'<rect x="6" y="3" width="12" height="18" rx="5"/><path d="M10 9c1.5 1 1.5 3 0 4m4-4c1.5 1 1.5 3 0 4"/>',
+    drip:'<path d="M4 7h9a3 3 0 0 1 3 3v2"/><path d="M16 16c-1 1.3-1.5 2.1-1.5 2.7a1.5 1.5 0 0 0 3 0c0-.6-.5-1.4-1.5-2.7z"/>'
+  };
+  const data = [
+    {k:"ceiling", t:"מים יורדים מהתקרה", u:true, lvl:"דחוף. להתקשר עכשיו",
+     steps:["סגרו את הברז הראשי של הדירה, בדרך כלל ליד שעון המים","נתקו את החשמל בחדר שבו יש מים","הניחו דלי ומגבות, וצלמו את הנזק בשביל הביטוח"], price:"₪350–900"},
+    {k:"clog", t:"סתימה בכיור או בשירותים", u:false, lvl:"אפשר לתאם להיום",
+     steps:["אל תשפכו חומרים כימיים לפתיחת סתימות, הם מסוכנים כשאני עובד על הצנרת","אם המים עולים בשירותים, אל תורידו שוב את המים","נסו פומפה רגילה, בלי לדחוף כבלים לצנרת"], price:"₪250–450"},
+    {k:"heater", t:"אין מים חמים", u:false, lvl:"אפשר לתאם להיום או למחר",
+     steps:["בדקו בלוח החשמל שהמפסק של הדוד לא קפץ","בדקו את שעון השבת או את הטיימר של הדוד","אם יוצאים מים מהדוד עצמו, סגרו את הברז שנכנס אליו"], price:"₪300–550"},
+    {k:"drip", t:"ברז מטפטף", u:false, lvl:"לא דחוף",
+     steps:["סגרו את ברזון הניל מתחת לכיור כדי לעצור את הטפטוף","אפשר לחכות כמה ימים בלי נזק","צלמו את הברז ושלחו לי בוואטסאפ, כדי שאביא את החלק הנכון"], price:"₪200–320"}
+  ];
+  const opts = document.getElementById("opts"), res = document.getElementById("result");
+  const show = i => {
+    const d = data[i];
+    [...opts.children].forEach((b, j) => b.setAttribute("aria-pressed", j === i));
+    res.innerHTML = `<span class="lvl ${d.u ? "u" : "c"}">${d.lvl}</span>
+      <h3>מה לעשות עד שאגיע</h3><ol>${d.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+      <div class="range"><span>טווח מחיר משוער</span><b>${d.price}</b></div>
+      <a class="call" href="tel:0500000000">${d.u ? "להתקשר עכשיו" : "לתאם ביקור"} <b>050-000-0000</b></a>`;
+    res.classList.remove("fade"); res.offsetHeight; res.classList.add("fade");
+  };
+  data.forEach((d, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt";
+    b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon[d.k]}</svg>${d.t}`;
+    b.addEventListener("click", () => show(i));
+    opts.append(b);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

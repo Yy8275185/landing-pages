@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>אלון אימון אישי</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Assistant:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a training board — huge condensed numbers, a live rest timer, lane lines, and a week planner that fills itself by goal and frequency */
+:root{
+  --bg:#F4F4F0; --surface:#FFFFFF; --ink:#111318; --muted:#5E626C; --line:#DADBD4;
+  --blue:#1D3FD6; --red:#E0322B; --lane:#F2C230; --blue-soft:#E3E8FB;
+  --display:"Karantina","Assistant",Impact,sans-serif;
+  --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121419; --surface:#1A1D24; --ink:#F1F2F4; --muted:#A3A7B2; --line:#2C303A;
+  --blue:#6C86FF; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121419; --surface:#1A1D24; --ink:#F1F2F4; --muted:#A3A7B2; --line:#2C303A;
+  --blue:#6C86FF; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;overflow-x:hidden}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.9;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.tag{font-family:var(--mono);font-size:13px;color:var(--blue)}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;border-bottom:4px solid var(--ink)}
+.brand{font-family:var(--display);font-size:40px;line-height:1}
+.btn{display:inline-flex;align-items:center;gap:8px;font:800 17px/1 var(--body);text-decoration:none;padding:15px 24px;border-radius:4px;border:0;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.line{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);background:transparent}
+
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:36px;padding-block:44px 64px;align-items:end;position:relative}
+.hero > *{min-width:0}
+.hero h1{font-size:clamp(78px,13vw,168px);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero .lede{font-size:20px;color:var(--muted);margin-top:16px;max-width:40ch}
+.hero .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.timer{background:var(--ink);color:var(--bg);border-radius:10px;padding:22px;display:grid;gap:10px}
+.timer .lbl{font-family:var(--mono);font-size:13px;opacity:.7;display:flex;justify-content:space-between}
+.timer .clock{font-family:var(--mono);font-size:clamp(54px,7vw,76px);line-height:1;direction:ltr;text-align:center;font-variant-numeric:tabular-nums}
+.timer .clock.work{color:var(--lane)}
+.timer .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
+.timer .bar i{display:block;height:100%;background:var(--red);width:100%;transform-origin:right;transition:transform 1s linear}
+.timer .set{font-weight:800;text-align:center;font-size:17px}
+
+.lanes{height:14px;background:repeating-linear-gradient(90deg,var(--lane) 0 60px,transparent 60px 90px);animation:run 3s linear infinite;opacity:.9}
+@keyframes run{to{background-position:-90px 0}}
+
+section{padding-block:72px}
+.head{display:grid;gap:10px;margin-bottom:34px;max-width:680px}
+.head h2{font-size:clamp(56px,8vw,96px)}
+.head p{color:var(--muted)}
+
+/* numbers */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.facts div{padding:24px;border-inline-start:2px solid var(--ink)}
+.facts div:first-child{border-inline-start:0}
+.facts b{font-family:var(--display);font-size:clamp(64px,8vw,96px);line-height:.9;display:block;color:var(--blue)}
+.facts span{color:var(--muted);font-size:16.5px}
+
+/* planner */
+.planner{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
+.planner > *{min-width:0}
+.ctl{display:grid;gap:22px}
+.ctl legend{font-weight:800;margin-bottom:8px;padding:0}
+fieldset{border:0;margin:0;padding:0}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{padding:10px 16px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--line);cursor:pointer;font-weight:600;background:var(--surface);transition:background .2s,color .2s,box-shadow .2s}
+.seg input:checked + label{background:var(--ink);color:var(--bg);box-shadow:none}
+.seg input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:6px;min-height:150px;padding:10px 8px;display:flex;flex-direction:column;gap:6px;transition:background .3s,border-color .3s;min-width:0}
+.day b{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.day.on{background:var(--blue-soft);border-color:var(--blue)}
+.day .ses{font-weight:800;font-size:15px;line-height:1.25;animation:in .4s cubic-bezier(.2,1.2,.4,1) backwards}
+.day .min{font-family:var(--mono);font-size:12px;color:var(--blue)}
+.day.rest .ses{color:var(--muted);font-weight:600}
+@keyframes in{from{transform:translateY(8px) scale(.96)}}
+.plan-sum{margin-top:14px;color:var(--muted);font-size:16px}
+
+/* prices */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pr{background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:24px;display:grid;gap:6px;transition:transform .2s,box-shadow .2s}
+.pr:hover{transform:translate(4px,-4px);box-shadow:-8px 8px 0 var(--ink)}
+.pr h3{font-size:44px}
+.pr .n{font-family:var(--display);font-size:72px;line-height:.9;color:var(--blue)}
+.pr p{color:var(--muted);font-size:16px}
+
+.where{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.where div{border-inline-start:6px solid var(--lane);padding:6px 18px}
+.where h3{font-size:44px}
+.where p{color:var(--muted)}
+
+.final{background:var(--blue);color:#fff;border-radius:8px;padding:48px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+.final h2{font-size:clamp(56px,8vw,96px)}
+.final .btn{background:#fff;color:var(--blue)}
+footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
+.mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:2px solid var(--ink);z-index:9}
+.mbar .btn{width:100%;justify-content:center}
+
+@media (max-width:900px){.hero,.planner{grid-template-columns:1fr}.prices{grid-template-columns:1fr}.week{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:560px){.facts{grid-template-columns:1fr}.facts div{border-inline-start:0;border-top:2px solid var(--ink)}.facts div:first-child{border-top:0}.where{grid-template-columns:1fr}.week{grid-template-columns:repeat(2,1fr)}.day{min-height:96px}.mbar{display:block}nav .btn{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body style="margin:0">
+
+<div dir="rtl" lang="he">
+<div class="wrap">
+  <nav><span class="brand">אלון · אימון אישי</span><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">שיחת היכרות</a></nav>
+
+  <header class="hero">
+    <div>
+      <p class="tag">PERSONAL TRAINER · TEL AVIV</p>
+      <h1>50 דקות.<br><em>בלי מנוי.</em></h1>
+      <p class="lede">אימון אישי בפארק הירקון או אצלכם בסלון. אני מביא את הציוד, אתם מביאים מים ונעליים.</p>
+      <div class="row">
+        <a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">לקבוע אימון ניסיון</a>
+        <a class="btn line" href="#plan">לבנות תוכנית שבועית</a>
+      </div>
+    </div>
+    <div class="timer" aria-label="טיימר מנוחה לדוגמה">
+      <div class="lbl"><span id="tPhase">מנוחה</span><span id="tSet">סט 2 מתוך 4</span></div>
+      <div class="clock" id="tClock">00:45</div>
+      <div class="bar"><i id="tBar"></i></div>
+      <div class="set" id="tNext">הבא: סקוואט גביע × 12</div>
+    </div>
+  </header>
+</div>
+<div class="lanes" aria-hidden="true"></div>
+
+<div class="wrap">
+  <section>
+    <div class="facts">
+      <div><b>50</b><span>דקות לאימון, כולל חימום ומתיחות</span></div>
+      <div><b>1:1</b><span>מתאמן אחד, או זוג שמתאמן יחד</span></div>
+      <div><b>0</b><span>ציוד שצריך לקנות. הכל מגיע איתי</span></div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="head"><p class="tag">WEEKLY PLAN</p><h2>איך נראה שבוע אצלי</h2><p>בחרו מטרה וכמה פעמים בשבוע. זו דוגמה, ובשיחת ההיכרות נתאים אותה אליכם.</p></div>
+    <div class="planner">
+      <form class="ctl" id="pForm" onsubmit="return false">
+        <fieldset><legend>מטרה</legend><div class="seg" id="gSeg"></div></fieldset>
+        <fieldset><legend>אימונים בשבוע</legend><div class="seg" id="fSeg"></div></fieldset>
+      </form>
+      <div>
+        <div class="week" id="week" aria-live="polite"></div>
+        <p class="plan-sum" id="sum"></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><p class="tag">PRICES</p><h2>מחירים</h2></div>
+    <div class="prices">
+      <div class="pr"><h3>אימון בודד</h3><span class="n">₪200</span><p>50 דקות, בפארק או בבית.</p></div>
+      <div class="pr"><h3>כרטיסייה</h3><span class="n">₪1,800</span><p>10 אימונים, בתוקף לשלושה חודשים.</p></div>
+      <div class="pr"><h3>אימון זוגי</h3><span class="n">₪260</span><p>לשניים יחד, מחיר לאימון.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="where">
+      <div><h3>בפארק</h3><p>פארק הירקון, ליד גני יהושע. בבוקר מוקדם ובערב.</p></div>
+      <div><h3>אצלכם</h3><p>מספיק מקום של מזרן אחד. רמת אביב, צפון הישן ורמת החייל.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="final"><h2>אימון ניסיון ב-₪100</h2><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
+  </section>
+</div>
+<footer><div class="wrap">דף לדוגמה. אלון, המספר והמחירים אינם אמיתיים.</div></footer>
+<div class="mbar"><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">אימון ניסיון ב-₪100</a></div>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // rest timer demo
+  const seq = [{p:"מנוחה",s:45,n:"הבא: סקוואט גביע × 12"},{p:"עבודה",s:40,n:"עכשיו: סקוואט גביע × 12"},{p:"מנוחה",s:45,n:"הבא: חתירה עם גומייה × 15"},{p:"עבודה",s:40,n:"עכשיו: חתירה עם גומייה × 15"}];
+  const clock = document.getElementById("tClock"), bar = document.getElementById("tBar"), ph = document.getElementById("tPhase"), nx = document.getElementById("tNext"), st = document.getElementById("tSet");
+  let i = 0, left = seq[0].s;
+  const draw = () => {
+    const c = seq[i];
+    clock.textContent = "00:" + String(left).padStart(2, "0");
+    clock.classList.toggle("work", c.p === "עבודה");
+    ph.textContent = c.p; nx.textContent = c.n; st.textContent = `סט ${Math.floor(i/2)+2} מתוך 4`;
+    bar.style.transform = `scaleX(${left / c.s})`;
+  };
+  draw();
+  if (!reduce) setInterval(() => { left--; if (left < 0) { i = (i + 1) % seq.length; left = seq[i].s; } draw(); }, 1000);
+
+  // weekly planner
+  const G = {
+    "כוח": ["רגליים וישבן","גב ויד קדמית","חזה וכתפיים","גוף מלא, משקולות"],
+    "ירידה במשקל": ["אינטרוולים","גוף מלא, מעגלים","הליכה מהירה בעליות","גוף מלא, משקולות"],
+    "כושר כללי": ["גוף מלא","ריצה קלה וליבה","גמישות ויציבה","גוף מלא, מעגלים"]
+  };
+  const DAYS = ["א׳","ב׳","ג׳","ד׳","ה׳","ו׳","ש׳"];
+  const SLOTS = {2:[0,3],3:[0,2,4],4:[0,1,3,4]};
+  const seg = (id, name, arr, def) => {
+    const box = document.getElementById(id);
+    arr.forEach((v, k) => {
+      const inp = document.createElement("input"); inp.type = "radio"; inp.name = name; inp.id = name + k; inp.value = v; if (k === def) inp.checked = true;
+      const lab = document.createElement("label"); lab.htmlFor = inp.id; lab.textContent = name === "f" ? v + " פעמים" : v;
+      box.append(inp, lab);
+    });
+  };
+  seg("gSeg", "g", Object.keys(G), 0); seg("fSeg", "f", ["2","3","4"], 1);
+  const form = document.getElementById("pForm"), week = document.getElementById("week"), sum = document.getElementById("sum");
+  const render = () => {
+    const f = new FormData(form), g = f.get("g"), n = +f.get("f"), slots = SLOTS[n];
+    week.innerHTML = DAYS.map((d, k) => {
+      const j = slots.indexOf(k);
+      return j > -1
+        ? `<div class="day on"><b>${d}</b><span class="ses" style="animation-delay:${j*70}ms">${G[g][j]}</span><span class="min">50 דק׳</span></div>`
+        : `<div class="day rest"><b>${d}</b><span class="ses">מנוחה</span></div>`;
+    }).join("");
+    sum.textContent = `${n} אימונים, ${n*50} דקות בשבוע. מטרה: ${g}.`;
+  };
+  form.addEventListener("change", render); render();
+})();
+</script>
+</body>
+</html>
