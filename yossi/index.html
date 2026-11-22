@@ -70,9 +70,12 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .range b{font-family:var(--mono);font-size:20px;direction:ltr}
 .result .call{justify-content:center}
 .result .after{font-size:15px;color:var(--muted);text-align:center}
-.slot{border:2px dashed var(--line);border-radius:16px;padding:28px;display:grid;gap:8px;background:var(--surface)}
-.slot h2{font-size:clamp(28px,4vw,40px)}
-.slot p{color:var(--muted)}
+.rvs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rv{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rv .stars{color:var(--copper);letter-spacing:2px}
+.rv blockquote{margin:0;font-size:17px}
+.rv figcaption{font-weight:700;margin-top:auto}
+@media (max-width:900px){.rvs{grid-template-columns:1fr}}
 .fade{animation:fade .35s ease}
 @keyframes fade{from{transform:translateY(6px)}}
 
@@ -80,7 +83,7 @@ section{padding-block:70px;border-top:1px solid var(--line)}
 .head{display:grid;gap:8px;margin-bottom:32px;max-width:680px}
 .head h2{font-size:clamp(34px,4.6vw,52px)}
 .head p{color:var(--muted)}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:520px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:340px}
 .tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px}
 th,td{text-align:start;padding:15px 18px;border-bottom:1px solid var(--line)}
 thead th{font-size:14px;color:var(--muted);font-weight:600}
@@ -140,18 +143,23 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   <section>
     <div class="head"><span class="anno">PRICE LIST</span><h2>מחירים</h2><p>המחיר נסגר בטלפון אחרי שתתארו את התקלה. אם בשטח מתברר שיש עבודה נוספת, אני עוצר ושואל לפני שממשיכים.</p></div>
     <div class="tbl"><table>
-      <thead><tr><th>עבודה</th><th>כמה זמן</th><th>מחיר</th></tr></thead>
+      <thead><tr><th>עבודה</th><th>מחיר</th></tr></thead>
       <tbody>
-        <tr><td>פתיחת סתימה בכיור או באמבטיה</td><td>חצי שעה</td><td>₪250–350</td></tr>
-        <tr><td>פתיחת סתימה בשירותים</td><td>חצי שעה עד שעה</td><td>₪300–450</td></tr>
-        <tr><td>החלפת ברז או ברזון ניל</td><td>חצי שעה</td><td>₪200–320</td></tr>
-        <tr><td>תיקון דוד שמש או חשמלי</td><td>שעה</td><td>₪300–550</td></tr>
-        <tr><td>איתור נזילה במצלמה תרמית</td><td>שעה עד שעתיים</td><td>₪600–900</td></tr>
+        <tr><td>פתיחת סתימה בכיור או באמבטיה</td><td>₪250–350</td></tr>
+        <tr><td>פתיחת סתימה בשירותים</td><td>₪300–450</td></tr>
+        <tr><td>החלפת ברז או ברזון ניל</td><td>₪200–320</td></tr>
+        <tr><td>תיקון דוד שמש או חשמלי</td><td>₪300–550</td></tr>
+        <tr><td>איתור נזילה במצלמה תרמית</td><td>₪600–900</td></tr>
       </tbody></table></div>
   </section>
 
   <section>
-    <div class="slot"><span class="anno">REVIEWS</span><h2>מה אומרים הלקוחות</h2><p>כאן ייכנסו ביקורות אמיתיות מגוגל, ותמונות של עבודות לפני ואחרי. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
+    <div class="head"><span class="anno">REVIEWS</span><h2>מה אומרים הלקוחות</h2><p>ביקורות לדוגמה</p></div>
+    <div class="rvs">
+      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>מים ירדו מהתקרה בשתיים בלילה. יוסי אמר לי בטלפון לסגור את הברז הראשי, והגיע תוך חצי שעה.</blockquote><figcaption>אורי ב.</figcaption></figure>
+      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>שם ניילון על הרצפה לפני שפתח משהו, והשאיר לי את הברזון הישן כדי שאראה איפה היה הסדק.</blockquote><figcaption>לימור ט.</figcaption></figure>
+      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>סתימה בשירותים ביום שישי בצהריים. שילמתי בדיוק מה שסיכמנו בטלפון, וקיבלתי חשבונית בוואטסאפ.</blockquote><figcaption>משה ג.</figcaption></figure>
+    </div>
   </section>
 
   <section>
@@ -197,8 +205,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
     res.innerHTML = `<span class="lvl ${d.u ? "u" : "c"}">${d.lvl}</span>
       <h3>מה לעשות עד שאגיע</h3><ol>${d.steps.map(s => `<li>${s}</li>`).join("")}</ol>
       <div class="range"><span>טווח מחיר משוער</span><b>${d.price}</b></div>
-      <a class="call" href="tel:0500000000">${d.u ? "להתקשר עכשיו" : "לתאם ביקור"} <b>050-000-0000</b></a>
-      <p class="after">אם לא עניתי, אני חוזר אליכם תוך 15 דקות.</p>`;
+      <a class="call" href="tel:0500000000">${d.u ? "להתקשר עכשיו" : "לתאם ביקור"} <b>050-000-0000</b></a>`;
     res.classList.remove("fade"); res.offsetHeight; res.classList.add("fade");
   };
   data.forEach((d, i) => {

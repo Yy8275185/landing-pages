@@ -67,23 +67,55 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .slot{border:2px dashed var(--line);border-radius:24px;padding:30px;max-width:760px;display:grid;gap:8px}
 .slot h2{font-size:clamp(32px,4vw,44px)}
 .slot p{color:var(--muted)}
+/* reviews */
+.rvs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rv{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.rv blockquote{margin:0;font-family:var(--display);font-size:22px;line-height:1.4}
+.rv figcaption{color:var(--muted);font-size:15px;margin-top:auto}
+.rv figcaption b{color:var(--ink)}
+.sample{font-size:14px;color:var(--muted)}
+
 /* booking */
-.book{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
+.book{display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:start}
 .book > *{min-width:0}
-fieldset{border:0;padding:0;margin:0 0 22px}
-legend{font-weight:700;margin-bottom:10px;padding:0}
+.stepper{display:grid;gap:26px}
+.stp h3{font-family:var(--body);font-weight:700;font-size:17px;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.stp h3 span{width:26px;height:26px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center;font-size:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips input{position:absolute;opacity:0;pointer-events:none}
-.chips label{padding:9px 16px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer;font-size:16px;transition:background .2s,box-shadow .2s,color .2s}
-.chips input:checked + label{background:var(--rose);color:#fff;box-shadow:none}
-.chips input:focus-visible + label{outline:2px solid var(--rose);outline-offset:3px}
-.phone{background:var(--surface);border-radius:28px;padding:22px;box-shadow:0 30px 60px -40px rgba(58,20,32,.5);border:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px)}
-.chat-top{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px;font-weight:700}
-.chat-top i{width:36px;height:36px;border-radius:50%;background:var(--rose-soft);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:20px}
-.bubble{background:#DCF8C6;color:#1B2A1E;border-radius:16px 4px 16px 16px;padding:12px 14px;font-size:16.5px;line-height:1.55;margin-inline-start:auto;max-width:92%;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
-@keyframes pop{from{transform:scale(.96)}}
-.phone .pill{width:100%;justify-content:center;margin-top:18px}
-.note{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
+.chip{font:600 16px/1.2 var(--body);padding:10px 16px;border-radius:999px;border:0;background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.chip small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--rose);color:#fff;box-shadow:none}
+.chip[aria-pressed="true"] small{color:#fff;opacity:.85}
+.days{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.day{font:600 15px/1.25 var(--body);padding:10px 4px;border-radius:14px;border:0;background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer;text-align:center}
+.day b{display:block;font-family:var(--display);font-weight:400;font-size:22px}
+.day small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.day[aria-pressed="true"]{background:var(--ink);color:var(--bg);box-shadow:none}
+.day[aria-pressed="true"] small{color:var(--bg);opacity:.75}
+.day:disabled{opacity:.4;cursor:not-allowed}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.tm{font:600 15px/1 var(--body);font-variant-numeric:tabular-nums;padding:12px 0;border-radius:12px;border:0;background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer;transition:transform .15s}
+.tm:hover:not(:disabled){transform:translateY(-2px)}
+.tm:disabled{background:transparent;color:var(--muted);text-decoration:line-through;box-shadow:inset 0 0 0 1px var(--line);opacity:.55;cursor:not-allowed}
+.tm[aria-pressed="true"]{background:var(--rose);color:#fff;box-shadow:none}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:10px}
+.field{display:grid;gap:4px;max-width:320px}
+.field label{font-size:15px;font-weight:700}
+.field input{font:inherit;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.summary{background:var(--surface);border-radius:28px;padding:24px;box-shadow:0 30px 60px -40px rgba(58,20,32,.5);border:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);display:grid;gap:14px}
+.summary h3{font-size:30px}
+.sum-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted var(--line);padding-bottom:8px;font-size:16px}
+.sum-row span{color:var(--muted)}
+.sum-row b{text-align:end}
+.pill:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.summary .pill{width:100%;justify-content:center}
+.held{display:grid;gap:12px;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+.held .ok{color:var(--ok);font-weight:700;display:flex;gap:8px;align-items:center}
+.held .clock{font-variant-numeric:tabular-nums;font-weight:700;direction:ltr;display:inline-block}
+.bubble{background:#DCF8C6;color:#1B2A1E;border-radius:16px 4px 16px 16px;padding:12px 14px;font-size:15.5px;line-height:1.55}
+.linkish{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;justify-self:center}
+.note{font-size:14px;color:var(--muted);text-align:center}
+@keyframes pop{from{transform:scale(.97)}}
 
 /* aftercare */
 .after{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:820px}
@@ -99,7 +131,8 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:1px solid var(--line);z-index:9}
 .mbar .pill{width:100%;justify-content:center}
 
-@media (max-width:860px){.hero,.book{grid-template-columns:1fr}.compact{max-width:300px}.phone{position:static}}
+@media (max-width:860px){.hero,.book{grid-template-columns:1fr}.compact{max-width:300px}.summary{position:static}.rvs{grid-template-columns:1fr}}
+@media (max-width:480px){.days{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:560px){.after{grid-template-columns:1fr}.mbar{display:block}nav .pill{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -137,23 +170,25 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   </section>
 
   <section>
-    <div class="slot"><p class="kicker">לפני ואחרי</p><h2>מה אומרות המטופלות</h2><p>כאן ייכנסו ביקורות אמיתיות עם שם פרטי, ותמונות לפני ואחרי באישור המטופלות. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
+    <div class="head"><p class="kicker">מטופלות מספרות</p><h2>מה אומרות אחרי הטיפול</h2><p class="sample">ביקורות לדוגמה</p></div>
+    <div class="rvs">
+      <figure class="rv"><blockquote>יש לי עור רגיש שמאדים מכל דבר. זו הפעם הראשונה שיצאתי מטיפול פנים בלי כתמים אדומים.</blockquote><figcaption><b>שירה ל.</b> · טיפול לעור רגיש</figcaption></figure>
+      <figure class="rv"><blockquote>אין חדר המתנה ואין מוזיקה רועשת. שעה וחצי של שקט, והיא לא ניסתה למכור לי אף קרם.</blockquote><figcaption><b>יעל מ.</b> · ניקוי עמוק</figcaption></figure>
+      <figure class="rv"><blockquote>באתי בגלל כתמים מההריון. נועה אמרה מראש שצריך סדרה של ארבעה טיפולים, ואחרי השלישי כבר ראיתי הבדל.</blockquote><figcaption><b>נטע ש.</b> · פילינג כימי עדין</figcaption></figure>
+    </div>
   </section>
 
   <section id="book">
-    <div class="head"><p class="kicker">קביעת תור</p><h2>בוחרים, ואני מקבלת הודעה</h2><p>סמני טיפול, יום ושעה. ההודעה נכתבת לבד, ונשאר רק לשלוח אותה בוואטסאפ.</p></div>
+    <div class="head"><p class="kicker">קביעת תור</p><h2>בוחרים שעה ומשריינים</h2><p>רואים אילו שעות פנויות, משריינים תור ל-15 דקות, ושולחים לי הודעה לאישור.</p></div>
     <div class="book">
-      <form id="bookForm" onsubmit="return false">
-        <fieldset><legend>טיפול</legend><div class="chips" id="tChips"></div></fieldset>
-        <fieldset><legend>יום</legend><div class="chips" id="dChips"></div></fieldset>
-        <fieldset><legend>שעה</legend><div class="chips" id="hChips"></div></fieldset>
-      </form>
-      <div class="phone">
-        <div class="chat-top"><i>נ</i>נועה קוסמטיקה</div>
-        <p class="bubble" id="msg"></p>
-        <a class="pill main" id="send" href="https://wa.me/972500000000" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
-        <p class="note">אחזור אלייך עם שעה מדויקת, בדרך כלל באותו יום.</p>
+      <div class="stepper">
+        <div class="stp"><h3><span>1</span>טיפול</h3><div class="chips" id="tChips"></div></div>
+        <div class="stp"><h3><span>2</span>יום</h3><div class="days" id="days"></div></div>
+        <div class="stp"><h3><span>3</span>שעה</h3><div class="times" id="times" aria-live="polite"></div>
+          <div class="legend"><span>שעה עם קו: תפוסה</span><span>רואים רק שעות שהטיפול כולו נכנס בהן</span></div></div>
+        <div class="stp"><h3><span>4</span>שם</h3><div class="field"><label for="cname">איך לקרוא לך?</label><input id="cname" autocomplete="given-name" value="דנה"></div></div>
       </div>
+      <aside class="summary" id="summary" aria-live="polite"></aside>
     </div>
   </section>
 
@@ -182,28 +217,102 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 
 <script>
 (() => {
-  const T = ["טיפול פנים קלאסי","ניקוי עמוק","טיפול לעור רגיש","פילינג כימי עדין"];
-  const D = ["ראשון","שני","שלישי","רביעי","חמישי"];
-  const H = ["בוקר","צהריים","ערב"];
-  const build = (id, name, arr, def) => {
-    const box = document.getElementById(id);
-    arr.forEach((v, i) => {
-      const inp = document.createElement("input");
-      inp.type = "radio"; inp.name = name; inp.id = name + i; inp.value = v; if (i === def) inp.checked = true;
-      const lab = document.createElement("label"); lab.htmlFor = inp.id; lab.textContent = v;
-      box.append(inp, lab);
-    });
+  const PHONE = "972500000000";
+  const T = [
+    {n:"טיפול פנים קלאסי", m:75, p:320},
+    {n:"ניקוי עמוק", m:90, p:380},
+    {n:"טיפול לעור רגיש", m:60, p:300},
+    {n:"פילינג כימי עדין", m:45, p:260}
+  ];
+  const OPEN = 9*60, CLOSE = 20*60, STEP = 30, HOLD_MIN = 15;
+  const DAYN = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+  const pad = n => String(n).padStart(2,"0");
+  const hm = m => pad(Math.floor(m/60)) + ":" + pad(m%60);
+  const key = d => d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
+
+  // next six working days (Sun–Thu)
+  const days = []; const d0 = new Date(); d0.setHours(0,0,0,0);
+  for (let i = 0; days.length < 6 && i < 14; i++) { const d = new Date(d0); d.setDate(d0.getDate()+i); if (d.getDay() <= 4) days.push(d); }
+
+  // sample busy appointments, stable per date
+  const rnd = seed => () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const busy = d => {
+    const r = rnd(+key(d).replace(/-/g,"") % 2147483646 + 1), list = [];
+    const n = 2 + Math.floor(r()*3);
+    for (let i = 0; i < n; i++) { const s = OPEN + Math.floor(r()*20)*STEP; list.push([s, s + [60,75,90][Math.floor(r()*3)]]); }
+    if (d.getTime() === d0.getTime()) { const now = new Date(); list.push([OPEN, now.getHours()*60 + now.getMinutes() + 60]); }
+    return list;
   };
-  build("tChips", "t", T, 0); build("dChips", "d", D, 2); build("hChips", "h", H, 0);
-  const form = document.getElementById("bookForm"), msg = document.getElementById("msg"), send = document.getElementById("send");
-  const update = () => {
-    const f = new FormData(form);
-    const text = `היי נועה, אשמח לקבוע ${f.get("t")} ביום ${f.get("d")} ב${f.get("h")}. מתי נוח לך?`;
-    msg.textContent = text;
-    msg.style.animation = "none"; msg.offsetHeight; msg.style.animation = "";
-    send.href = "https://wa.me/972500000000?text=" + encodeURIComponent(text);
+
+  let st = { t:0, d:0, time:null, held:null };
+  try { const h = JSON.parse(localStorage.getItem("noa-hold") || "null"); if (h && h.until > Date.now()) st.held = h; } catch(e) {}
+
+  const tBox = document.getElementById("tChips"), dBox = document.getElementById("days"), tmBox = document.getElementById("times"), sum = document.getElementById("summary"), nameI = document.getElementById("cname");
+
+  const free = (d, len) => {
+    const b = busy(d), out = [];
+    for (let s = OPEN; s + len <= CLOSE; s += STEP) out.push({ s, ok: !b.some(([a,z]) => s < z && s + len > a) });
+    return out;
   };
-  form.addEventListener("change", update); update();
+
+  const renderT = () => { tBox.innerHTML = T.map((t,i) => `<button type="button" class="chip" aria-pressed="${i===st.t}" data-i="${i}">${t.n}<small>${t.m} דק׳ · ₪${t.p}</small></button>`).join(""); };
+  const renderD = () => {
+    dBox.innerHTML = days.map((d,i) => {
+      const any = free(d, T[st.t].m).some(x => x.ok);
+      return `<button type="button" class="day" aria-pressed="${i===st.d}" data-i="${i}" ${any?"":"disabled"}>${DAYN[d.getDay()]}<b>${d.getDate()}.${d.getMonth()+1}</b><small>${any?"יש מקום":"מלא"}</small></button>`;
+    }).join("");
+  };
+  const renderTimes = () => {
+    tmBox.innerHTML = free(days[st.d], T[st.t].m).map(x =>
+      `<button type="button" class="tm" data-s="${x.s}" aria-pressed="${x.s===st.time}" ${x.ok?"":"disabled"} aria-label="${hm(x.s)}${x.ok?"":" תפוס"}">${hm(x.s)}</button>`).join("");
+  };
+  const msgText = h => `היי נועה, שריינתי ${h.t} ביום ${h.day} ${h.date} בשעה ${h.from}. השם שלי ${h.name}. אפשר לאשר?`;
+  const renderSum = () => {
+    if (st.held) {
+      const h = st.held, left = Math.max(0, h.until - Date.now()), mm = Math.floor(left/60000), ss = Math.floor(left/1000)%60;
+      sum.innerHTML = `<div class="held"><h3>התור משוריין</h3>
+        <span class="ok">✓ ${h.t}, ${h.day} ${h.date}, <bdi dir="ltr">${h.from}–${h.to}</bdi></span>
+        <p>התור שמור על שמך עוד <span class="clock" id="clk">${pad(mm)}:${pad(ss)}</span> דקות. כדי לסגור אותו, שלחי לי הודעה:</p>
+        <p class="bubble">${msgText(h)}</p>
+        <a class="pill main" target="_blank" rel="noopener" href="https://wa.me/${PHONE}?text=${encodeURIComponent(msgText(h))}">שליחה בוואטסאפ</a>
+        <button type="button" class="linkish" id="cancel">לבטל את השריון</button></div>`;
+      document.getElementById("cancel").onclick = () => { st.held = null; save(); renderAll(); };
+      return;
+    }
+    const t = T[st.t], d = days[st.d];
+    sum.innerHTML = `<h3>התור שלך</h3>
+      <div class="sum-row"><span>טיפול</span><b>${t.n}</b></div>
+      <div class="sum-row"><span>יום</span><b>${DAYN[d.getDay()]} ${d.getDate()}.${d.getMonth()+1}</b></div>
+      <div class="sum-row"><span>שעה</span><b>${st.time!=null ? `<bdi dir="ltr">${hm(st.time)}–${hm(st.time+t.m)}</bdi>` : "עוד לא נבחרה"}</b></div>
+      <div class="sum-row"><span>מחיר</span><b>₪${t.p}</b></div>
+      <button type="button" class="pill main" id="hold" ${st.time==null?"disabled":""}>לשריין ל-${HOLD_MIN} דקות</button>
+      <p class="note">ביטול עד 24 שעות לפני התור, בלי עלות.</p>`;
+    document.getElementById("hold").onclick = () => {
+      if (st.time == null) return;
+      st.held = { t:t.n, day:DAYN[d.getDay()], date:`${d.getDate()}.${d.getMonth()+1}`, from:hm(st.time), to:hm(st.time+t.m), name:(nameI.value.trim()||"…"), until:Date.now()+HOLD_MIN*60000 };
+      save(); renderSum();
+    };
+  };
+  const save = () => { try { localStorage.setItem("noa-hold", JSON.stringify(st.held)); } catch(e) {} };
+  const renderAll = () => {
+    if (free(days[st.d], T[st.t].m).every(x => !x.ok)) { const i = days.findIndex(d => free(d, T[st.t].m).some(x => x.ok)); if (i > -1) st.d = i; }
+    renderT(); renderD(); renderTimes(); renderSum();
+  };
+
+  tBox.onclick = e => { const b = e.target.closest(".chip"); if (!b || st.held) return; st.t = +b.dataset.i; st.time = null; renderAll(); };
+  dBox.onclick = e => { const b = e.target.closest(".day"); if (!b || b.disabled || st.held) return; st.d = +b.dataset.i; st.time = null; renderAll(); };
+  tmBox.onclick = e => { const b = e.target.closest(".tm"); if (!b || b.disabled || st.held) return; st.time = +b.dataset.s; renderTimes(); renderSum(); };
+
+  // start with the first free slot selected, so the card shows a full example
+  (() => { const f = free(days[st.d], T[st.t].m).find(x => x.ok) || null; if (!f) { renderAll(); const g = free(days[st.d], T[st.t].m).find(x => x.ok); st.time = g ? g.s : null; } else st.time = f.s; })();
+  renderAll();
+
+  setInterval(() => {
+    if (!st.held) return;
+    if (st.held.until <= Date.now()) { st.held = null; save(); renderAll(); return; }
+    const c = document.getElementById("clk"); if (!c) return;
+    const left = st.held.until - Date.now(); c.textContent = pad(Math.floor(left/60000)) + ":" + pad(Math.floor(left/1000)%60);
+  }, 1000);
 })();
 </script>
 <!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->

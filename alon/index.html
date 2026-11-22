@@ -60,7 +60,7 @@ section{padding-block:72px}
 .head p{color:var(--muted)}
 
 /* numbers */
-.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
 .facts div{padding:24px;border-inline-start:2px solid var(--ink)}
 .facts div:first-child{border-inline-start:0}
 .facts b{font-family:var(--display);font-size:clamp(64px,8vw,96px);line-height:.9;display:block;color:var(--blue)}
@@ -103,9 +103,13 @@ fieldset{border:0;margin:0;padding:0}
 .final{background:var(--blue);color:#fff;border-radius:8px;padding:48px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
 .final h2{font-size:clamp(56px,8vw,96px)}
 .final p{margin-top:8px;opacity:.85;font-size:18px}
-.slot{border:2px dashed var(--ink);border-radius:6px;padding:28px;display:grid;gap:8px}
-.slot h2{font-size:clamp(44px,6vw,64px)}
-.slot p{color:var(--muted)}
+.slot h2{font-size:clamp(56px,8vw,96px)}
+.slot > p{color:var(--muted)}
+.rvs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.rv{margin:0;background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rv blockquote{margin:0;font-size:17.5px}
+.rv figcaption{font-family:var(--display);font-size:30px;line-height:1;color:var(--blue);margin-top:auto}
+@media (max-width:900px){.rvs{grid-template-columns:1fr}}
 .final .btn{background:#fff;color:var(--blue)}
 footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:2px solid var(--ink);z-index:9}
@@ -120,13 +124,13 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 
 <div dir="rtl" lang="he">
 <div class="wrap">
-  <nav><span class="brand">אלון · אימון אישי</span><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">שיחת היכרות</a></nav>
+  <nav><span class="brand">אלון · אימון אישי</span><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">אימון ניסיון</a></nav>
 
   <header class="hero">
     <div>
-      <p class="tag">PERSONAL TRAINER · TEL AVIV</p>
+      <p class="tag">אימון אישי ואימון זוגי</p>
       <h1>מאמן אישי<br><em>בתל אביב.</em></h1>
-      <p class="lede">50 דקות, בלי מנוי: בפארק הירקון או אצלכם בסלון. אני מביא את הציוד, אתם מביאים מים ונעליים.</p>
+      <p class="lede">אימונים של 50 דקות בפארק הירקון או אצלכם בסלון, בלי מנוי לחדר כושר. את הציוד אני מביא, ואתם צריכים רק מים ונעליים.</p>
       <div class="row">
         <a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">לקבוע אימון ניסיון</a>
         <a class="btn line" href="#plan">לבנות תוכנית שבועית</a>
@@ -146,13 +150,12 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   <section>
     <div class="facts">
       <div><b>50</b><span>דקות לאימון, כולל חימום ומתיחות</span></div>
-      <div><b>1:1</b><span>מתאמן אחד, או זוג שמתאמן יחד</span></div>
-      <div><b>0</b><span>ציוד שצריך לקנות. הכל מגיע איתי</span></div>
+      <div><b>1:1</b><span>רק אתם ואני. אפשר גם להתאמן בזוג</span></div>
     </div>
   </section>
 
   <section id="plan">
-    <div class="head"><p class="tag">WEEKLY PLAN</p><h2>איך נראה שבוע אצלי</h2><p>בחרו מטרה וכמה פעמים בשבוע. זו דוגמה, ובשיחת ההיכרות נתאים אותה אליכם.</p></div>
+    <div class="head"><h2>איך נראה שבוע אצלי</h2><p>בחרו מטרה וכמה אימונים בשבוע, ותראו תוכנית לדוגמה. באימון הניסיון נבנה את התוכנית שלכם.</p></div>
     <div class="planner">
       <form class="ctl" id="pForm" onsubmit="return false">
         <fieldset><legend>מטרה</legend><div class="seg" id="gSeg"></div></fieldset>
@@ -166,7 +169,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
-    <div class="head"><p class="tag">PRICES</p><h2>מחירים</h2></div>
+    <div class="head"><h2>מחירים</h2></div>
     <div class="prices">
       <div class="pr"><h3>אימון בודד</h3><span class="n">₪200</span><p>50 דקות, בפארק או בבית.</p></div>
       <div class="pr"><h3>כרטיסייה</h3><span class="n">₪1,800</span><p>10 אימונים, בתוקף לשלושה חודשים.</p></div>
@@ -175,7 +178,12 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
-    <div class="slot"><p class="tag">RESULTS</p><h2>מה אומרים המתאמנים</h2><p>כאן ייכנסו ביקורות אמיתיות עם שם, ותוצאות שהמתאמנים אישרו לפרסם. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p></div>
+    <div class="slot"><h2>מה אומרים המתאמנים</h2><p>ביקורות לדוגמה</p></div>
+    <div class="rvs">
+      <figure class="rv"><blockquote>התחלתי בגיל 52 בלי שום ניסיון. אלון התאים כל תרגיל לברך שלי, ואחרי שלושה חודשים אני עולה ארבע קומות בלי להתנשף.</blockquote><figcaption>עמית ג.</figcaption></figure>
+      <figure class="rv"><blockquote>אנחנו מתאמנים בזוג בסלון, פעמיים בשבוע. הוא מגיע עם תיק אחד, ואחרי האימון הסלון נראה בדיוק כמו קודם.</blockquote><figcaption>רוני ואסף</figcaption></figure>
+      <figure class="rv"><blockquote>רציתי להתחזק לפני ריצה של 10 ק״מ. קיבלתי את התוכנית בוואטסאפ, וכל שבוע הוא שינה אותה לפי איך שהרגשתי.</blockquote><figcaption>מאיה ד.</figcaption></figure>
+    </div>
   </section>
 
   <section>
@@ -186,7 +194,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
-    <div class="final"><div><h2>אימון ניסיון ב-₪100</h2><p>עונה בוואטסאפ עד הערב, וקובעים יחד יום לאימון.</p></div><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
+    <div class="final"><div><h2>אימון ניסיון ב-₪100</h2><p>שלחו הודעה, ואענה עד הערב כדי לקבוע יום ושעה.</p></div><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
   </section>
 </div>
 <footer><div class="wrap">דף לדוגמה. אלון, המספר והמחירים אינם אמיתיים.</div></footer>

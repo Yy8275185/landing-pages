@@ -47,9 +47,15 @@ p{margin:0}
   line-height:1;margin-top:22px;color:var(--ink);text-decoration:none;letter-spacing:.01em}
 .bignum:hover{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:10px}
 .sticker .after{font-weight:600;font-size:17px;margin-top:12px}
-.proof{border:3px dashed var(--ink);padding:28px;max-width:620px;transform:rotate(-.8deg);background:rgba(251,250,245,.55)}
-.proof h2{font-family:var(--hand);font-size:48px;color:var(--pen);line-height:1}
-.proof p{margin-top:8px}
+.reviews h2{font-family:var(--display);font-size:clamp(38px,6vw,52px)}
+.reviews .sample{font-size:14px;color:#3E3C37;margin-top:4px}
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+.rv{position:relative;background:var(--paper);padding:30px 22px 20px;box-shadow:0 14px 24px -16px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:12px}
+.rv:nth-child(1){transform:rotate(-1.8deg)}.rv:nth-child(2){transform:rotate(1.2deg);margin-top:18px}.rv:nth-child(3){transform:rotate(-.6deg)}
+.rv .tape{top:-12px;left:50%;margin-left:-45px;width:90px;transform:rotate(-3deg)}
+.rv p{font-size:17px;line-height:1.55}
+.rv b{font-family:var(--hand);font-size:32px;color:var(--pen);line-height:1;margin-top:auto}
+@media (max-width:760px){.notes{grid-template-columns:1fr}.rv:nth-child(2){margin-top:0}}
 .stamp{display:inline-block;margin-top:18px;border:3px solid var(--ink);padding:4px 14px;font-weight:800;font-size:18px;transform:rotate(1deg)}
 
 /* handwritten note */
@@ -149,9 +155,14 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
     <div><h3>הילד ננעל בפנים לבד</h3><p>תגידו לי את זה במשפט הראשון, ואני יוצא אליכם לפני כל קריאה אחרת.</p></div>
   </section>
 
-  <section class="proof" aria-labelledby="proofh">
-    <h2 id="proofh">מה אומרים השכנים</h2>
-    <p>כאן ייכנסו ביקורות אמיתיות עם שם ושכונה, ותמונות של דלתות שפתחתי. בדף לדוגמה אין ביקורות, כי לא ממציאים אותן.</p>
+  <section class="reviews" aria-labelledby="rvh">
+    <h2 id="rvh">מה אומרים עליי</h2>
+    <p class="sample">ביקורות לדוגמה</p>
+    <div class="notes">
+      <div class="rv"><span class="tape" aria-hidden="true"></span><p>ננעלתי בחוץ והתינוקת נשארה בפנים. אבי הגיע תוך רבע שעה, פתח בלי שריטה על הדלת, ונשאר עוד דקה לוודא שאנחנו בסדר.</p><b>מיכל ר.</b></div>
+      <div class="rv"><span class="tape" aria-hidden="true"></span><p>אמר בטלפון 280 ושילמתי 280. נשמע מובן מאליו, אבל ממש לא כל מנעולן עובד ככה.</p><b>דני כ.</b></div>
+      <div class="rv"><span class="tape" aria-hidden="true"></span><p>החליף לי צילינדר אחרי שעברתי דירה. עשר דקות, חמישה מפתחות, והסביר לי למה לשמור את כרטיס המפתח במגירה ולא בארנק.</p><b>רותם א.</b></div>
+    </div>
   </section>
 
   <section class="flyer" aria-labelledby="tear">
