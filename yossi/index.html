@@ -11,17 +11,17 @@
 /* Layout: a plumbing schematic — copper pipes with running water frame a triage panel ("what's happening at your place?"), then prices and service area */
 :root{
   --bg:#EEF3F6; --surface:#FFFFFF; --ink:#10283A; --muted:#566B7B; --line:#CFDBE3; --grid:rgba(30,136,199,.09);
-  --water:#1E88C7; --copper:#B8622E; --urgent:#D23B2B; --calm:#2F8A5B;
+  --water:#1E88C7; --copper:#B8622E; --urgent:#B42E20; --control:#73899A; --calm:#22673F;
   --display:"Rubik","Assistant",system-ui,sans-serif;
   --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
-  --water:#4DAAE2; --copper:#D98149; --urgent:#F06A5A; --calm:#5CC48D; color-scheme:dark}}
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --calm:#5CC48D; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
-  --water:#4DAAE2; --copper:#D98149; --urgent:#F06A5A; --calm:#5CC48D; color-scheme:dark}
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --calm:#5CC48D; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.65;overflow-x:hidden;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
@@ -55,7 +55,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .triage h2{font-size:30px}
 .triage > p{color:var(--muted);margin-top:4px}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-.opt{font:700 16.5px/1.3 var(--body);text-align:start;padding:14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:center;transition:border-color .2s,transform .2s}
+.opt{font:700 16.5px/1.3 var(--body);text-align:start;padding:14px;border-radius:12px;border:1.5px solid var(--control);background:var(--bg);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:center;transition:border-color .2s,transform .2s}
 .opt:hover{transform:translateY(-2px)}
 .opt[aria-pressed="true"]{border-color:var(--water);background:color-mix(in srgb,var(--water) 10%,var(--surface))}
 .opt svg{width:26px;height:26px;flex:none;stroke:var(--water);fill:none;stroke-width:1.8}
@@ -97,16 +97,39 @@ td:last-child{font-family:var(--mono);direction:ltr;text-align:end;white-space:n
 .areas span{background:var(--surface);border:1px solid var(--line);padding:6px 14px;border-radius:8px}
 footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--ink);z-index:9}
-.mbar .call{width:100%;justify-content:center;background:var(--water);color:#fff}
+.mbar .call{width:100%;justify-content:center;background:var(--bg);color:var(--ink)}
 
 @media (max-width:900px){.hero{grid-template-columns:1fr}.pipes{display:none}.promise{grid-template-columns:1fr}}
 @media (max-width:560px){.opts{grid-template-columns:1fr}.mbar{display:block}nav .call{display:none}.triage{padding:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* accessibility helpers */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:700 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+.motion-btn{position:fixed;z-index:60;inset-inline-end:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:6px;background:Canvas;color:CanvasText;border:1.5px solid CanvasText;border-radius:999px;padding:7px 12px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;opacity:.88;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
+.motion-btn:hover,.motion-btn:focus-visible{opacity:1}
+.motion-btn:focus-visible{outline:3px solid CanvasText;outline-offset:2px}
+.motion-btn svg{width:14px;height:14px;fill:currentColor}
+@media (max-width:560px){.motion-btn{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+.motion-paused *,.motion-paused *::before,.motion-paused *::after{animation:none!important}
+.a11y-link{background:none;border:0;padding:4px 0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.a11y-dialog{width:min(640px,calc(100% - 32px));max-height:calc(100% - 48px);border:1.5px solid CanvasText;border-radius:16px;padding:26px 24px;background:Canvas;color:CanvasText;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16.5px;line-height:1.65}
+.a11y-dialog::backdrop{background:rgba(0,0,0,.55)}
+.a11y-dialog h2{font-size:26px;margin:0 0 10px;font-family:inherit}
+.a11y-dialog h3{font-size:18px;margin:18px 0 4px;font-family:inherit}
+.a11y-dialog p,.a11y-dialog ul{margin:0}
+.a11y-dialog ul{padding-inline-start:20px}
+.a11y-dialog .upd{margin-top:16px;font-size:14px;opacity:.8}
+.a11y-dialog .close{margin-top:20px;font:700 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
 </style>
 </head>
 <body style="margin:0">
 
 <div dir="rtl" lang="he">
+<a class="skip" href="#main">דילוג לתוכן</a>
+<button type="button" class="motion-btn" id="motionBtn" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path id="motionIcon" d="M4 2h3v12H4zM9 2h3v12H9z"/></svg><span>עצירת תנועה</span></button>
+
 <div class="wrap">
   <nav>
     <span class="brand"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M4 8h10a4 4 0 0 1 4 4v10" fill="none" stroke="var(--copper)" stroke-width="4" stroke-linecap="round"/><path d="M18 26c-2.5 0-4-1.7-4-3.6 0-2 4-6.4 4-6.4s4 4.4 4 6.4c0 1.9-1.5 3.6-4 3.6z" fill="var(--water)"/></svg>יוסי אינסטלציה</span>
@@ -140,8 +163,9 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
     </div>
   </header>
 
+  <main id="main">
   <section>
-    <div class="head"><span class="anno">PRICE LIST</span><h2>מחירים</h2><p>המחיר נסגר בטלפון אחרי שתתארו את התקלה. אם בשטח מתברר שיש עבודה נוספת, אני עוצר ושואל לפני שממשיכים.</p></div>
+    <div class="head"><span class="anno">PRICE LIST</span><h2>מחירים</h2><p>המחיר נסגר בטלפון אחרי שתתארו את התקלה. אם בשטח מתברר שיש עבודה נוספת, אני עוצר ושואל לפני שממשיכים. המחירים כוללים מע״מ.</p></div>
     <div class="tbl"><table>
       <thead><tr><th>עבודה</th><th>מחיר</th></tr></thead>
       <tbody>
@@ -175,10 +199,33 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
     <div class="head"><h2>אזורי שירות</h2></div>
     <div class="areas"><span>חולון</span><span>בת ים</span><span>ראשון לציון</span><span>אזור</span><span>יפו</span><span>נס ציונה</span></div>
   </section>
+  </main>
 </div>
-<footer><div class="wrap">דף לדוגמה. יוסי, המספר והמחירים אינם אמיתיים.</div></footer>
-<div class="mbar"><a class="call" href="tel:0500000000">חיוג ליוסי <b>050-000-0000</b></a></div>
+<footer><div class="wrap">דף לדוגמה. יוסי, המספר והמחירים אינם אמיתיים. · <button type="button" class="a11y-link" data-open-a11y>הצהרת נגישות</button></div></footer>
+<aside class="mbar" aria-label="יצירת קשר מהירה"><a class="call" href="tel:0500000000">חיוג ליוסי <b>050-000-0000</b></a></aside>
 </div>
+
+<dialog class="a11y-dialog" id="a11yDialog" aria-labelledby="a11yTitle" dir="rtl" lang="he">
+  <h2 id="a11yTitle">הצהרת נגישות</h2>
+  <p>האתר של יוסי אינסטלציה בנוי כך שאפשר להשתמש בו עם מקלדת בלבד, עם קורא מסך ועם הגדלת טקסט.</p>
+  <h3>לפי איזה תקן</h3>
+  <p>האתר הותאם לתקן הישראלי ת״י 5568 ברמה AA, שמבוסס על הנחיות WCAG 2.0, ונבדק גם מול WCAG 2.2 ברמה AA.</p>
+  <h3>מה הונגש</h3>
+  <ul>
+    <li>ניווט מלא במקלדת, עם סימון ברור של המקום בדף</li>
+    <li>קישור "דילוג לתוכן" בתחילת הדף</li>
+    <li>ניגודיות צבעים לפי התקן, במצב בהיר ובמצב כהה</li>
+    <li>כותרות, אזורים ותיאורים לקוראי מסך</li>
+    <li>כפתור לעצירת התנועה בדף</li>
+    <li>התאמה לטלפון ולהגדלת טקסט</li>
+  </ul>
+  <h3>מה עוד לא נבדק</h3>
+  <p>האתר עבר בדיקה אוטומטית ובדיקה ידנית. עוד לא נעשתה בדיקה של משתמש עם קורא מסך.</p>
+  <h3>נתקלתם בבעיה?</h3>
+  <p>רכז הנגישות: יוסי, טלפון 050-000-0000. נחזור אליכם תוך 3 ימי עסקים. (דף לדוגמה: הפרטים אינם אמיתיים.)</p>
+  <p class="upd">עדכון אחרון: 23 בנובמבר 2026</p>
+  <form method="dialog"><button class="close" type="submit">סגירה</button></form>
+</dialog>
 
 <script>
 (() => {
@@ -216,6 +263,34 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
     opts.append(b);
   });
   show(0);
+})();
+</script>
+<script>
+(function () {
+  var root = document.documentElement, KEY = "motion-paused";
+  var btn = document.getElementById("motionBtn"), label = btn.querySelector("span"), icon = document.getElementById("motionIcon");
+  function set(v) {
+    root.classList.toggle("motion-paused", v); window.motionPaused = v;
+    btn.setAttribute("aria-pressed", v ? "true" : "false");
+    label.textContent = v ? "הפעלת תנועה" : "עצירת תנועה";
+    icon.setAttribute("d", v ? "M4 2l10 6-10 6z" : "M4 2h3v12H4zM9 2h3v12H9z");
+  }
+  var start = false;
+  try { start = localStorage.getItem(KEY) === "1"; } catch (e) {}
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) start = true;
+  set(start);
+  btn.addEventListener("click", function () {
+    var v = !root.classList.contains("motion-paused"); set(v);
+    try { localStorage.setItem(KEY, v ? "1" : "0"); } catch (e) {}
+  });
+  var dlg = document.getElementById("a11yDialog");
+  document.querySelectorAll("[data-open-a11y]").forEach(function (b) {
+    b.addEventListener("click", function () { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
+  });
+  document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+    if (a.querySelector(".sr-only")) return;
+    var s = document.createElement("span"); s.className = "sr-only"; s.textContent = " (נפתח בלשונית חדשה)"; a.appendChild(s);
+  });
 })();
 </script>
 <!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->

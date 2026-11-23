@@ -11,17 +11,17 @@
 /* Layout: a training board — huge condensed numbers, a live rest timer, lane lines, and a week planner that fills itself by goal and frequency */
 :root{
   --bg:#F4F4F0; --surface:#FFFFFF; --ink:#111318; --muted:#5E626C; --line:#DADBD4;
-  --blue:#1D3FD6; --red:#E0322B; --lane:#F2C230; --blue-soft:#E3E8FB;
+  --blue:#1D3FD6; --on-blue:#FFFFFF; --control:#80817A; --red:#E0322B; --lane:#F2C230; --blue-soft:#E3E8FB;
   --display:"Karantina","Assistant",Impact,sans-serif;
   --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121419; --surface:#1A1D24; --ink:#F1F2F4; --muted:#A3A7B2; --line:#2C303A;
-  --blue:#6C86FF; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}}
+  --blue:#8EA1FF; --on-blue:#0B1230; --control:#6C7283; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121419; --surface:#1A1D24; --ink:#F1F2F4; --muted:#A3A7B2; --line:#2C303A;
-  --blue:#6C86FF; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}
+  --blue:#8EA1FF; --on-blue:#0B1230; --control:#6C7283; --red:#FF5A4F; --lane:#F2C230; --blue-soft:#232B4A; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;overflow-x:hidden}
 .wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -34,7 +34,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .brand{font-family:var(--display);font-size:40px;line-height:1}
 .btn{display:inline-flex;align-items:center;gap:8px;font:800 17px/1 var(--body);text-decoration:none;padding:15px 24px;border-radius:4px;border:0;cursor:pointer;transition:transform .15s}
 .btn:active{transform:scale(.97)}
-.btn.blue{background:var(--blue);color:#fff}
+.btn.blue{background:var(--blue);color:var(--on-blue)}
 .btn.line{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);background:transparent}
 
 .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:36px;padding-block:44px 64px;align-items:end;position:relative}
@@ -74,7 +74,7 @@ section{padding-block:72px}
 fieldset{border:0;margin:0;padding:0}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg input{position:absolute;opacity:0;pointer-events:none}
-.seg label{padding:10px 16px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--line);cursor:pointer;font-weight:600;background:var(--surface);transition:background .2s,color .2s,box-shadow .2s}
+.seg label{padding:10px 16px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--control);cursor:pointer;font-weight:600;background:var(--surface);transition:background .2s,color .2s,box-shadow .2s}
 .seg input:checked + label{background:var(--ink);color:var(--bg);box-shadow:none}
 .seg input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
 .week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -100,7 +100,7 @@ fieldset{border:0;margin:0;padding:0}
 .where h3{font-size:44px}
 .where p{color:var(--muted)}
 
-.final{background:var(--blue);color:#fff;border-radius:8px;padding:48px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+.final{background:var(--blue);color:var(--on-blue);border-radius:8px;padding:48px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
 .final h2{font-size:clamp(56px,8vw,96px)}
 .final p{margin-top:8px;opacity:.85;font-size:18px}
 .slot h2{font-size:clamp(56px,8vw,96px)}
@@ -110,7 +110,7 @@ fieldset{border:0;margin:0;padding:0}
 .rv blockquote{margin:0;font-size:17.5px}
 .rv figcaption{font-family:var(--display);font-size:30px;line-height:1;color:var(--blue);margin-top:auto}
 @media (max-width:900px){.rvs{grid-template-columns:1fr}}
-.final .btn{background:#fff;color:var(--blue)}
+.final .btn{background:var(--on-blue);color:var(--blue)}
 footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:2px solid var(--ink);z-index:9}
 .mbar .btn{width:100%;justify-content:center}
@@ -118,11 +118,34 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 @media (max-width:900px){.hero,.planner{grid-template-columns:1fr}.prices{grid-template-columns:1fr}.week{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:560px){.facts{grid-template-columns:1fr}.facts div{border-inline-start:0;border-top:2px solid var(--ink)}.facts div:first-child{border-top:0}.where{grid-template-columns:1fr}.week{grid-template-columns:repeat(2,1fr)}.day{min-height:96px}.mbar{display:block}nav .btn{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* accessibility helpers */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:700 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+.motion-btn{position:fixed;z-index:60;inset-inline-end:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:6px;background:Canvas;color:CanvasText;border:1.5px solid CanvasText;border-radius:999px;padding:7px 12px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;opacity:.88;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
+.motion-btn:hover,.motion-btn:focus-visible{opacity:1}
+.motion-btn:focus-visible{outline:3px solid CanvasText;outline-offset:2px}
+.motion-btn svg{width:14px;height:14px;fill:currentColor}
+@media (max-width:560px){.motion-btn{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+.motion-paused *,.motion-paused *::before,.motion-paused *::after{animation:none!important}
+.a11y-link{background:none;border:0;padding:4px 0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.a11y-dialog{width:min(640px,calc(100% - 32px));max-height:calc(100% - 48px);border:1.5px solid CanvasText;border-radius:16px;padding:26px 24px;background:Canvas;color:CanvasText;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16.5px;line-height:1.65}
+.a11y-dialog::backdrop{background:rgba(0,0,0,.55)}
+.a11y-dialog h2{font-size:26px;margin:0 0 10px;font-family:inherit}
+.a11y-dialog h3{font-size:18px;margin:18px 0 4px;font-family:inherit}
+.a11y-dialog p,.a11y-dialog ul{margin:0}
+.a11y-dialog ul{padding-inline-start:20px}
+.a11y-dialog .upd{margin-top:16px;font-size:14px;opacity:.8}
+.a11y-dialog .close{margin-top:20px;font:700 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
 </style>
 </head>
 <body style="margin:0">
 
 <div dir="rtl" lang="he">
+<a class="skip" href="#main">דילוג לתוכן</a>
+<button type="button" class="motion-btn" id="motionBtn" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path id="motionIcon" d="M4 2h3v12H4zM9 2h3v12H9z"/></svg><span>עצירת תנועה</span></button>
+
 <div class="wrap">
   <nav><span class="brand">אלון · אימון אישי</span><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">אימון ניסיון</a></nav>
 
@@ -146,7 +169,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 </div>
 <div class="lanes" aria-hidden="true"></div>
 
-<div class="wrap">
+<main id="main" class="wrap">
   <section>
     <div class="facts">
       <div><b>50</b><span>דקות לאימון, כולל חימום ומתיחות</span></div>
@@ -169,7 +192,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   </section>
 
   <section>
-    <div class="head"><h2>מחירים</h2></div>
+    <div class="head"><h2>מחירים</h2><p>המחירים כוללים מע״מ.</p></div>
     <div class="prices">
       <div class="pr"><h3>אימון בודד</h3><span class="n">₪200</span><p>50 דקות, בפארק או בבית.</p></div>
       <div class="pr"><h3>כרטיסייה</h3><span class="n">₪1,800</span><p>10 אימונים, בתוקף לשלושה חודשים.</p></div>
@@ -196,10 +219,32 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   <section>
     <div class="final"><div><h2>אימון ניסיון ב-₪100</h2><p>שלחו הודעה, ואענה עד הערב כדי לקבוע יום ושעה.</p></div><a class="btn" href="https://wa.me/972500000000" target="_blank" rel="noopener">לשלוח הודעה לאלון</a></div>
   </section>
+</main>
+<footer><div class="wrap">דף לדוגמה. אלון, המספר והמחירים אינם אמיתיים. · <button type="button" class="a11y-link" data-open-a11y>הצהרת נגישות</button></div></footer>
+<aside class="mbar" aria-label="יצירת קשר מהירה"><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">אימון ניסיון ב-₪100</a></aside>
 </div>
-<footer><div class="wrap">דף לדוגמה. אלון, המספר והמחירים אינם אמיתיים.</div></footer>
-<div class="mbar"><a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">אימון ניסיון ב-₪100</a></div>
-</div>
+
+<dialog class="a11y-dialog" id="a11yDialog" aria-labelledby="a11yTitle" dir="rtl" lang="he">
+  <h2 id="a11yTitle">הצהרת נגישות</h2>
+  <p>האתר של אלון אימון אישי בנוי כך שאפשר להשתמש בו עם מקלדת בלבד, עם קורא מסך ועם הגדלת טקסט.</p>
+  <h3>לפי איזה תקן</h3>
+  <p>האתר הותאם לתקן הישראלי ת״י 5568 ברמה AA, שמבוסס על הנחיות WCAG 2.0, ונבדק גם מול WCAG 2.2 ברמה AA.</p>
+  <h3>מה הונגש</h3>
+  <ul>
+    <li>ניווט מלא במקלדת, עם סימון ברור של המקום בדף</li>
+    <li>קישור "דילוג לתוכן" בתחילת הדף</li>
+    <li>ניגודיות צבעים לפי התקן, במצב בהיר ובמצב כהה</li>
+    <li>כותרות, אזורים ותיאורים לקוראי מסך</li>
+    <li>כפתור לעצירת התנועה בדף</li>
+    <li>התאמה לטלפון ולהגדלת טקסט</li>
+  </ul>
+  <h3>מה עוד לא נבדק</h3>
+  <p>האתר עבר בדיקה אוטומטית ובדיקה ידנית. עוד לא נעשתה בדיקה של משתמש עם קורא מסך.</p>
+  <h3>נתקלתם בבעיה?</h3>
+  <p>רכז הנגישות: אלון, טלפון 050-000-0000. נחזור אליכם תוך 3 ימי עסקים. (דף לדוגמה: הפרטים אינם אמיתיים.)</p>
+  <p class="upd">עדכון אחרון: 23 בנובמבר 2026</p>
+  <form method="dialog"><button class="close" type="submit">סגירה</button></form>
+</dialog>
 
 <script>
 (() => {
@@ -216,7 +261,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
     bar.style.transform = `scaleX(${left / c.s})`;
   };
   draw();
-  if (!reduce) setInterval(() => { left--; if (left < 0) { i = (i + 1) % seq.length; left = seq[i].s; } draw(); }, 1000);
+  if (!reduce) setInterval(() => { if (window.motionPaused) return; left--; if (left < 0) { i = (i + 1) % seq.length; left = seq[i].s; } draw(); }, 1000);
 
   // weekly planner
   const G = {
@@ -247,6 +292,34 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
     sum.textContent = `${n} אימונים, ${n*50} דקות בשבוע. מטרה: ${g}.`;
   };
   form.addEventListener("change", render); render();
+})();
+</script>
+<script>
+(function () {
+  var root = document.documentElement, KEY = "motion-paused";
+  var btn = document.getElementById("motionBtn"), label = btn.querySelector("span"), icon = document.getElementById("motionIcon");
+  function set(v) {
+    root.classList.toggle("motion-paused", v); window.motionPaused = v;
+    btn.setAttribute("aria-pressed", v ? "true" : "false");
+    label.textContent = v ? "הפעלת תנועה" : "עצירת תנועה";
+    icon.setAttribute("d", v ? "M4 2l10 6-10 6z" : "M4 2h3v12H4zM9 2h3v12H9z");
+  }
+  var start = false;
+  try { start = localStorage.getItem(KEY) === "1"; } catch (e) {}
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) start = true;
+  set(start);
+  btn.addEventListener("click", function () {
+    var v = !root.classList.contains("motion-paused"); set(v);
+    try { localStorage.setItem(KEY, v ? "1" : "0"); } catch (e) {}
+  });
+  var dlg = document.getElementById("a11yDialog");
+  document.querySelectorAll("[data-open-a11y]").forEach(function (b) {
+    b.addEventListener("click", function () { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); });
+  });
+  document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+    if (a.querySelector(".sr-only")) return;
+    var s = document.createElement("span"); s.className = "sr-only"; s.textContent = " (נפתח בלשונית חדשה)"; a.appendChild(s);
+  });
 })();
 </script>
 <!-- מדידה: מדביקים כאן את מזהה Google Analytics של הלקוח (נראה כמו G-XXXXXXX). כל עוד הוא ריק, שום דבר לא נטען. -->
