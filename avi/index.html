@@ -93,7 +93,7 @@ p{margin:0}
 .flyer-top p{color:#4B4A44;font-size:16px}
 .tabs{display:flex;border-top:2px dashed #9F9B90;overflow:hidden}
 .tab{flex:1;min-width:0;border:0;border-inline-start:2px dashed #9F9B90;background:var(--paper);color:var(--ink);cursor:pointer;
-  font:600 16px/1.2 var(--body);writing-mode:vertical-rl;padding:16px 0;height:190px;display:flex;align-items:center;justify-content:center;
+  font:600 16px/1.2 var(--body);writing-mode:vertical-rl;padding:16px 0;height:auto;min-height:190px;display:flex;align-items:center;justify-content:center;
   transition:transform .55s cubic-bezier(.5,0,.75,0),opacity .55s}
 .tab:first-child{border-inline-start:0}
 .tab span{direction:ltr;unicode-bidi:isolate;font-family:var(--display);font-weight:400;font-size:19px;margin-top:6px}
@@ -109,7 +109,7 @@ footer{font-size:14px;color:#3E3C37;text-align:center}
   .note,.scrap{padding:34px 22px 28px}
   .flyer-top{padding:26px 20px 18px}
   .flyer-msg{padding-inline:20px}
-  .tab{height:160px;font-size:14px}
+  .tab{min-height:160px;font-size:14px}
   .tab span{font-size:16px}
   .tab:nth-child(n+6){display:none}
 }

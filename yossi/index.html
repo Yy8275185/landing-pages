@@ -11,17 +11,17 @@
 /* Layout: a plumbing schematic — copper pipes with running water frame a triage panel ("what's happening at your place?"), then prices and service area */
 :root{
   --bg:#EEF3F6; --surface:#FFFFFF; --ink:#10283A; --muted:#566B7B; --line:#CFDBE3; --grid:rgba(30,136,199,.09);
-  --water:#1E88C7; --copper:#B8622E; --urgent:#B42E20; --control:#73899A; --calm:#22673F;
+  --water:#1E88C7; --copper:#B8622E; --urgent:#B42E20; --control:#73899A; --copper-text:#94491C; --calm:#22673F;
   --display:"Rubik","Assistant",system-ui,sans-serif;
   --body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
-  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --calm:#5CC48D; color-scheme:dark}}
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --copper-text:#D98149; --calm:#5CC48D; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0C1822; --surface:#13222E; --ink:#E6EEF3; --muted:#93A8B7; --line:#24394A; --grid:rgba(77,170,226,.10);
-  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --calm:#5CC48D; color-scheme:dark}
+  --water:#4DAAE2; --copper:#D98149; --urgent:#F58A7D; --control:#6A8296; --copper-text:#D98149; --calm:#5CC48D; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.65;overflow-x:hidden;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
@@ -29,7 +29,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18p
 h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;margin:0;text-wrap:balance}
 p{margin:0}
 :focus-visible{outline:3px solid var(--water);outline-offset:3px;border-radius:6px}
-.anno{font-family:var(--mono);font-size:12.5px;color:var(--copper);direction:ltr;display:inline-block}
+.anno{font-family:var(--mono);font-size:12.5px;color:var(--copper-text);direction:ltr;display:inline-block}
 
 nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
 .brand{font-family:var(--display);font-weight:800;font-size:26px;display:flex;align-items:center;gap:10px}
@@ -180,9 +180,9 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   <section>
     <div class="head"><span class="anno">REVIEWS</span><h2>מה אומרים הלקוחות</h2><p>ביקורות לדוגמה</p></div>
     <div class="rvs">
-      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>מים ירדו מהתקרה בשתיים בלילה. יוסי אמר לי בטלפון לסגור את הברז הראשי, והגיע תוך חצי שעה.</blockquote><figcaption>אורי ב.</figcaption></figure>
-      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>שם ניילון על הרצפה לפני שפתח משהו, והשאיר לי את הברזון הישן כדי שאראה איפה היה הסדק.</blockquote><figcaption>לימור ט.</figcaption></figure>
-      <figure class="rv"><div class="stars" aria-label="5 כוכבים">★★★★★</div><blockquote>סתימה בשירותים ביום שישי בצהריים. שילמתי בדיוק מה שסיכמנו בטלפון, וקיבלתי חשבונית בוואטסאפ.</blockquote><figcaption>משה ג.</figcaption></figure>
+      <figure class="rv"><div class="stars" role="img" aria-label="5 כוכבים">★★★★★</div><blockquote>מים ירדו מהתקרה בשתיים בלילה. יוסי אמר לי בטלפון לסגור את הברז הראשי, והגיע תוך חצי שעה.</blockquote><figcaption>אורי ב.</figcaption></figure>
+      <figure class="rv"><div class="stars" role="img" aria-label="5 כוכבים">★★★★★</div><blockquote>שם ניילון על הרצפה לפני שפתח משהו, והשאיר לי את הברזון הישן כדי שאראה איפה היה הסדק.</blockquote><figcaption>לימור ט.</figcaption></figure>
+      <figure class="rv"><div class="stars" role="img" aria-label="5 כוכבים">★★★★★</div><blockquote>סתימה בשירותים ביום שישי בצהריים. שילמתי בדיוק מה שסיכמנו בטלפון, וקיבלתי חשבונית בוואטסאפ.</blockquote><figcaption>משה ג.</figcaption></figure>
     </div>
   </section>
 
