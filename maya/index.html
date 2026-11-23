@@ -12,16 +12,16 @@
 /* palette taken from the illustrations: paper, Maya's teal scrubs, the star's yellow, the warm brown of the hair */
 :root{
   --bg:#F4F0E8; --surface:#FBF8F3; --ink:#3A2A24; --muted:#6B5B53; --line:#E2D8CC; --control:#8E7E74;
-  --accent:#2E6B64; --on-accent:#FFFFFF; --sun:#EBCB7A; --rust:#A8432F;
+  --accent:#2E6B64; --on-accent:#FFFFFF; --sun:#EBCB7A; --rust:#A8432F; --home:#F4F0E8;
   --display:"Fredoka","Varela Round",system-ui,sans-serif;
   --body:"Varela Round",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#221A17; --surface:#2D2420; --ink:#F2EAE1; --muted:#BBAA9E; --line:#3E322C; --control:#8A776B;
-  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; color-scheme:dark}}
+  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; --home:#221A17; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#221A17; --surface:#2D2420; --ink:#F2EAE1; --muted:#BBAA9E; --line:#3E322C; --control:#8A776B;
-  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; color-scheme:dark}
+  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; --home:#221A17; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;overflow-x:hidden}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -76,6 +76,19 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .wob{animation:wob 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 @keyframes wob{50%{transform:translateY(-4px) rotate(-3deg)}}
 
+
+/* two worlds, like the story: the top is the evening at home (warm paper), the rest is the clinic (its blue-grey walls) */
+.clinic{--bg:#E4EDEF; --surface:#F7FAFA; --ink:#1F3436; --muted:#4E6567; --line:#C7D6D9;
+  background:linear-gradient(180deg,var(--home) 0,var(--bg) 240px);color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .clinic{--bg:#152022; --surface:#1D2B2D; --ink:#E3EEEC; --muted:#A3B8B9; --line:#2B3D40}}
+:root[data-theme="dark"] .clinic{--bg:#152022; --surface:#1D2B2D; --ink:#E3EEEC; --muted:#A3B8B9; --line:#2B3D40}
+footer.clinic{background:var(--bg)}
+.mbar.clinic{background:var(--bg)}
+.morning{display:flex;align-items:center;justify-content:center;gap:14px;padding-block:64px 0;font-family:var(--display);font-weight:500;font-size:clamp(22px,3vw,28px);color:var(--muted);text-align:center}
+.morning::before,.morning::after{content:"";flex:1;max-width:140px;height:2px;background:linear-gradient(90deg,transparent,var(--line))}
+.morning::after{transform:scaleX(-1)}
+.morning svg{width:30px;height:30px;flex:none}
+.morning + section{padding-top:40px}
 section{padding-block:70px}
 .head{display:grid;gap:8px;margin-bottom:30px;max-width:640px}
 .head h2{font-size:clamp(34px,4.6vw,50px)}
@@ -94,9 +107,12 @@ section{padding-block:70px}
 .visit div{border-top:4px solid var(--accent);padding-top:10px}
 .visit span{display:block;font-size:14px;color:var(--muted)}
 .visit b{font-size:18px}
-.final{background:var(--ink);color:var(--bg);border-radius:28px;padding:44px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.final{background:#1F4A46;color:#E7F1EF;border-radius:28px;padding:44px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
 .final h2{font-size:clamp(32px,4.4vw,48px)}
 .final p{opacity:.85;margin-top:6px}
+.final .call{background:#FBF8F3;color:#2E6B64}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .final{background:#24514D;color:#E3EEEC}}
+:root[data-theme="dark"] .final{background:#24514D;color:#E3EEEC}
 footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
 .mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:1px solid var(--line);z-index:9}
 .mbar .call{width:100%;justify-content:center}
@@ -196,7 +212,8 @@ footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
   </header>
 </div>
 
-<main id="main" class="wrap">
+<main id="main" class="clinic"><div class="wrap">
+  <p class="morning"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="6" fill="#EBCB7A"/><g stroke="#EBCB7A" stroke-width="2.4" stroke-linecap="round"><path d="M15 2v4M15 24v4M2 15h4M24 15h4M5.8 5.8l2.8 2.8M21.4 21.4l2.8 2.8M5.8 24.2l2.8-2.8M21.4 8.6l2.8-2.8"/></g></svg>למחרת בבוקר, בקליניקה</p>
   <section>
     <div class="head"><h2>מה ההורים שואלים לפני הביקור הראשון</h2></div>
     <div class="facts">
@@ -232,9 +249,9 @@ footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
       <a class="call" href="tel:030000000">קביעת תור <b>03-000-0000</b></a>
     </div>
   </section>
-</main>
-<footer><div class="wrap">דף לדוגמה. מאיה, הכתובת והמספר אינם אמיתיים. · <button type="button" class="a11y-link" data-open-a11y>הצהרת נגישות</button></div></footer>
-<aside class="mbar" aria-label="יצירת קשר מהירה"><a class="call" href="tel:030000000">קביעת תור <b>03-000-0000</b></a></aside>
+</div></main>
+<footer class="clinic"><div class="wrap">דף לדוגמה. מאיה, הכתובת והמספר אינם אמיתיים. · <button type="button" class="a11y-link" data-open-a11y>הצהרת נגישות</button></div></footer>
+<aside class="mbar clinic" aria-label="יצירת קשר מהירה"><a class="call" href="tel:030000000">קביעת תור <b>03-000-0000</b></a></aside>
 </div>
 
 <dialog class="a11y-dialog" id="a11yDialog" aria-labelledby="a11yTitle" dir="rtl" lang="he">
