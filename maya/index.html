@@ -53,9 +53,10 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .book-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 6px 10px;font-size:14px;color:#4F5B78}
 .book-title b{font-family:var(--display);font-weight:600;font-size:17px;color:#1D2A4A}
 .pages{position:relative;aspect-ratio:4/3;max-width:100%}
-.pg{position:absolute;inset:0;display:grid;grid-template-rows:1fr auto;gap:10px;margin:0;transform-origin:right center;backface-visibility:hidden}
+.pg{position:absolute;inset:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:10px;margin:0;transform-origin:right center;backface-visibility:hidden}
 .pg[hidden]{display:none}
 .pg svg{width:100%;height:100%;display:block;border-radius:14px;background:#EAF6FD}
+.pg img{width:100%;height:100%;min-height:0;object-fit:contain;display:block;border-radius:14px}
 .pg figcaption{font-size:clamp(17px,2.1vw,21px);line-height:1.55;padding:0 6px;min-height:3.1em}
 .turn-out{animation:turnOut .45s cubic-bezier(.4,0,.6,1) forwards}
 .turn-in{animation:turnIn .45s cubic-bezier(.4,0,.6,1) both}
@@ -65,7 +66,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 @keyframes turnOutB{to{transform:rotateY(80deg);opacity:0}}
 @keyframes turnInB{from{transform:rotateY(-80deg);opacity:0}}
 .book-ctl{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
-.book-ctl button{font:700 16px/1 var(--body);background:#1D2A4A;color:#FFFFFF;border:0;border-radius:999px;padding:12px 18px;cursor:pointer}
+.book-ctl button{white-space:nowrap;font:700 16px/1 var(--body);background:#1D2A4A;color:#FFFFFF;border:0;border-radius:999px;padding:12px 18px;cursor:pointer}
 .book-ctl button:disabled{background:#E4ECF4;color:#6A7590;cursor:default}
 .dots{display:flex;gap:6px}
 .dots i{width:9px;height:9px;border-radius:50%;background:#C9D6E3}
@@ -102,7 +103,8 @@ footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
 .mbar .call{width:100%;justify-content:center}
 
 @media (max-width:900px){.hero{grid-template-columns:1fr}.rvs{grid-template-columns:1fr}.visit{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){html{scroll-padding-bottom:110px}.facts{grid-template-columns:1fr}.mbar{display:block}nav .call{display:none}.book{padding:12px 12px 10px}.pages{aspect-ratio:3/3.3}}
+@media (max-width:560px){html{scroll-padding-bottom:110px}.facts{grid-template-columns:1fr}.mbar{display:block}nav .call{display:none}.book{padding:12px 12px 10px}.pages{aspect-ratio:4/4.5}.book-ctl button{padding:11px 14px;font-size:15px}}
+@media (max-width:380px){.dots{display:none}.book-title{flex-direction:column;gap:2px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* accessibility helpers */
@@ -154,14 +156,7 @@ footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
         <div class="pages" id="pages">
 
           <figure class="pg">
-            <svg viewBox="0 0 400 260" aria-hidden="true">
-              <rect width="400" height="260" fill="#2B3A67"/>
-              <circle cx="320" cy="60" r="26" fill="#FFE7A3"/><circle cx="331" cy="52" r="24" fill="#2B3A67"/>
-              <circle cx="80" cy="40" r="2.5" fill="#fff"/><circle cx="150" cy="70" r="2" fill="#fff"/><circle cx="250" cy="30" r="2.5" fill="#fff"/>
-              <rect x="40" y="170" width="320" height="60" rx="16" fill="#D7462A"/><rect x="40" y="150" width="70" height="40" rx="14" fill="#fff"/>
-              <g class="wob"><circle cx="150" cy="150" r="30" fill="#F4C7A3"/><path d="M120 146c2-22 20-30 36-26 14 3 26 14 24 26-10-8-30-12-60 0z" fill="#6B3E26"/><circle cx="141" cy="154" r="3" fill="#1D2A4A"/><circle cx="160" cy="154" r="3" fill="#1D2A4A"/><path d="M143 165c5 4 11 4 16 0" fill="none" stroke="#1D2A4A" stroke-width="2.5" stroke-linecap="round"/></g>
-              <rect x="190" y="138" width="60" height="44" rx="4" fill="#FFC83D" transform="rotate(-8 220 160)"/><rect x="216" y="136" width="4" height="46" fill="#D7462A" transform="rotate(-8 220 160)"/>
-            </svg>
+            <img src="img/p1.webp" width="1024" height="765" alt="נועם במיטה לפני השינה, וההורה קורא לו סיפור" decoding="async">
             <figcaption>זה נועם. מחר בבוקר נועם הולך לבקר את מאיה. מאיה היא רופאת שיניים של ילדים.</figcaption>
           </figure>
 
