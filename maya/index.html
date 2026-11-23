@@ -9,49 +9,48 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Varela+Round&display=swap">
 <style>
 /* Layout: a picture book you can page through ("Noam goes to the dentist") is the hero; around it, plain notes for parents, sample reviews and visit details */
+/* palette taken from the illustrations: paper, Maya's teal scrubs, the star's yellow, the warm brown of the hair */
 :root{
-  --sky:#DCEFFA; --surface:#FFFFFF; --ink:#1D2A4A; --muted:#4F5B78; --line:#C3D6E6; --control:#7A8AA6;
-  --tomato:#C23A1F; --sun:#FFC83D; --leaf:#2F8F5B; --skin:#F4C7A3; --hair:#6B3E26;
+  --bg:#F4F0E8; --surface:#FBF8F3; --ink:#3A2A24; --muted:#6B5B53; --line:#E2D8CC; --control:#8E7E74;
+  --accent:#2E6B64; --on-accent:#FFFFFF; --sun:#EBCB7A; --rust:#A8432F;
   --display:"Fredoka","Varela Round",system-ui,sans-serif;
   --body:"Varela Round",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --sky:#132037; --surface:#1B2A47; --ink:#EEF3FA; --muted:#B3BFD6; --line:#2E3F62; --control:#7F8FB0;
-  --tomato:#FF8064; --leaf:#5CC48D; color-scheme:dark}}
+  --bg:#221A17; --surface:#2D2420; --ink:#F2EAE1; --muted:#BBAA9E; --line:#3E322C; --control:#8A776B;
+  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --sky:#132037; --surface:#1B2A47; --ink:#EEF3FA; --muted:#B3BFD6; --line:#2E3F62; --control:#7F8FB0;
-  --tomato:#FF8064; --leaf:#5CC48D; color-scheme:dark}
+  --bg:#221A17; --surface:#2D2420; --ink:#F2EAE1; --muted:#BBAA9E; --line:#3E322C; --control:#8A776B;
+  --accent:#7CC2B8; --on-accent:#1B1512; --rust:#E08A6F; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--sky);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;overflow-x:hidden}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
 p{margin:0}
-:focus-visible{outline:3px solid var(--tomato);outline-offset:3px;border-radius:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
 
 nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
 .brand{font-family:var(--display);font-weight:700;font-size:28px;display:flex;align-items:center;gap:10px}
 .brand svg{width:34px;height:34px}
 .brand small{font-family:var(--body);font-weight:400;font-size:15px;color:var(--muted)}
-.call{display:inline-flex;align-items:center;gap:10px;background:var(--tomato);color:#fff;text-decoration:none;border-radius:999px;padding:14px 22px;font:700 17px/1 var(--body);box-shadow:0 6px 0 rgba(0,0,0,.12);transition:transform .15s}
+.call{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--on-accent);text-decoration:none;border-radius:999px;padding:14px 22px;font:700 17px/1 var(--body);box-shadow:0 6px 0 rgba(0,0,0,.12);transition:transform .15s}
 .call:hover{transform:translateY(-2px)}
 .call b{direction:ltr;unicode-bidi:isolate}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .call{color:#1D0D08}}
-:root[data-theme="dark"] .call{color:#1D0D08}
 
 /* hero */
 .hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;padding-block:20px 70px}
 .hero > *{min-width:0}
 .hero h1{font-size:clamp(40px,5.6vw,68px)}
-.hero h1 span{display:inline-block;background:var(--sun);color:#1D2A4A;padding:0 .18em;border-radius:.2em;transform:rotate(-1.5deg)}
+.hero h1 span{display:inline-block;background:var(--sun);color:#3A2A24;padding:0 .18em;border-radius:.2em;transform:rotate(-1.5deg)}
 .lede{font-size:20px;color:var(--muted);margin-top:16px;max-width:36ch}
 .hero .row{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:26px}
 .after{font-size:15px;color:var(--muted)}
 
 /* the book */
-.book{position:relative;background:#FFFFFF;color:#1D2A4A;border-radius:18px 28px 28px 18px;padding:18px 18px 14px;box-shadow:0 2px 0 #C9D6E3,0 6px 0 #E4ECF4,0 10px 0 #C9D6E3,0 34px 50px -30px rgba(29,42,74,.55);perspective:1600px}
-.book::before{content:"";position:absolute;inset:0 auto 0 0;width:18px;border-radius:18px 0 0 18px;background:linear-gradient(90deg,#E4ECF4,#FFFFFF)}
-.book-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 6px 10px;font-size:14px;color:#4F5B78}
-.book-title b{font-family:var(--display);font-weight:600;font-size:17px;color:#1D2A4A}
+.book{position:relative;background:#FBF8F3;color:#3A2A24;border-radius:18px 28px 28px 18px;padding:18px 18px 14px;box-shadow:0 2px 0 #DDD2C4,0 6px 0 #EDE5DA,0 10px 0 #DDD2C4,0 34px 50px -30px rgba(58,42,36,.5);perspective:1600px}
+.book::before{content:"";position:absolute;inset:0 auto 0 0;width:18px;border-radius:18px 0 0 18px;background:linear-gradient(90deg,#E8DFD3,#FBF8F3)}
+.book-title{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 6px 10px;font-size:14px;color:#6B5B53}
+.book-title b{font-family:var(--display);font-weight:600;font-size:17px;color:#3A2A24}
 .pages{position:relative;aspect-ratio:4/3;max-width:100%}
 .pg{position:absolute;inset:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:10px;margin:0;transform-origin:right center;backface-visibility:hidden}
 .pg[hidden]{display:none}
@@ -66,11 +65,11 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 @keyframes turnOutB{to{transform:rotateY(80deg);opacity:0}}
 @keyframes turnInB{from{transform:rotateY(-80deg);opacity:0}}
 .book-ctl{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
-.book-ctl button{white-space:nowrap;font:700 16px/1 var(--body);background:#1D2A4A;color:#FFFFFF;border:0;border-radius:999px;padding:12px 18px;cursor:pointer}
-.book-ctl button:disabled{background:#E4ECF4;color:#6A7590;cursor:default}
+.book-ctl button{white-space:nowrap;font:700 16px/1 var(--body);background:#3A2A24;color:#FBF8F3;border:0;border-radius:999px;padding:12px 18px;cursor:pointer}
+.book-ctl button:disabled{background:#ECE4D9;color:#6B5B53;cursor:default}
 .dots{display:flex;gap:6px}
-.dots i{width:9px;height:9px;border-radius:50%;background:#C9D6E3}
-.dots i.on{background:#D7462A}
+.dots i{width:9px;height:9px;border-radius:50%;background:#D9CDBF}
+.dots i.on{background:#2E6B64}
 .book-tip{font-size:14px;color:var(--muted);margin-top:12px;text-align:center}
 
 /* svg art helpers */
@@ -92,14 +91,14 @@ section{padding-block:70px}
 .rv figcaption b{color:var(--ink)}
 .sample{font-size:14px;color:var(--muted)}
 .visit{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.visit div{border-top:4px solid var(--sun);padding-top:10px}
+.visit div{border-top:4px solid var(--accent);padding-top:10px}
 .visit span{display:block;font-size:14px;color:var(--muted)}
 .visit b{font-size:18px}
-.final{background:var(--ink);color:var(--sky);border-radius:28px;padding:44px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.final{background:var(--ink);color:var(--bg);border-radius:28px;padding:44px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
 .final h2{font-size:clamp(32px,4.4vw,48px)}
 .final p{opacity:.85;margin-top:6px}
 footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
-.mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--sky);border-top:1px solid var(--line);z-index:9}
+.mbar{position:fixed;inset:auto 0 0;display:none;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--bg);border-top:1px solid var(--line);z-index:9}
 .mbar .call{width:100%;justify-content:center}
 
 @media (max-width:900px){.hero{grid-template-columns:1fr}.rvs{grid-template-columns:1fr}.visit{grid-template-columns:1fr 1fr}}
@@ -136,7 +135,7 @@ footer{padding-block:30px 110px;color:var(--muted);font-size:14px}
 
 <div class="wrap">
   <nav>
-    <span class="brand"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M8 6c4-3 7 0 9 0s5-3 9 0c3 3 2 9 0 13-1 3-1 9-4 9s-2-7-5-7-2 7-5 7-3-6-4-9C6 15 5 9 8 6z" fill="#fff" stroke="#1D2A4A" stroke-width="2.4" stroke-linejoin="round"/><circle cx="13" cy="13" r="1.6" fill="#1D2A4A"/><circle cx="21" cy="13" r="1.6" fill="#1D2A4A"/><path d="M14 17c2 2 4 2 6 0" fill="none" stroke="#D7462A" stroke-width="2" stroke-linecap="round"/></svg>מאיה<small>רפואת שיניים לילדים</small></span>
+    <span class="brand"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M8 6c4-3 7 0 9 0s5-3 9 0c3 3 2 9 0 13-1 3-1 9-4 9s-2-7-5-7-2 7-5 7-3-6-4-9C6 15 5 9 8 6z" fill="#fff" stroke="#3A2A24" stroke-width="2.4" stroke-linejoin="round"/><circle cx="13" cy="13" r="1.6" fill="#3A2A24"/><circle cx="21" cy="13" r="1.6" fill="#3A2A24"/><path d="M14 17c2 2 4 2 6 0" fill="none" stroke="#A8432F" stroke-width="2" stroke-linecap="round"/></svg>מאיה<small>רפואת שיניים לילדים</small></span>
     <a class="call" href="tel:030000000">קביעת תור <b>03-000-0000</b></a>
   </nav>
 
