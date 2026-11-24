@@ -27,14 +27,15 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18p
 h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;margin:0;text-wrap:balance}
 p{margin:0}
 :focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:8px}
-.kicker{font-size:15px;font-weight:700;color:var(--rose)}
+.kicker{font-size:15px;font-weight:600;color:var(--rose)}
 
 nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px}
 .brand{font-family:var(--display);font-size:30px}
 .brand small{font-family:var(--body);font-size:14px;color:var(--muted);margin-inline-start:8px}
-.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;font:700 16px/1 var(--body);text-decoration:none;border:0;cursor:pointer;transition:transform .2s,background .2s}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:12px 22px;font:600 16px/1 var(--body);text-decoration:none;border:0;cursor:pointer;transition:background-color .2s ease-out,transform .1s ease-out}
 .pill.main{background:var(--rose);color:var(--on-rose)}
-.pill.main:hover{transform:translateY(-2px)}
+.pill.main:hover{background:color-mix(in srgb,var(--rose) 86%,#000)}
+.pill:active{transform:scale(.98)}
 .pill.soft{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:30px 80px}
@@ -43,13 +44,12 @@ nav{display:flex;justify-content:space-between;align-items:center;padding-block:
 .hero p.lede{font-size:20px;color:var(--muted);margin-top:18px;max-width:36ch}
 .hero .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .compact{position:relative;aspect-ratio:1;max-width:420px;width:100%;margin-inline:auto}
-.compact span{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--rose);opacity:.35;animation:breathe 6s ease-in-out infinite}
-.compact span:nth-child(2){inset:9%;opacity:.5;animation-delay:-1.5s}
-.compact span:nth-child(3){inset:18%;background:var(--powder);border:0;opacity:1;animation-delay:-3s}
-.compact span:nth-child(4){inset:30%;background:var(--rose-soft);border:0;opacity:1;animation-delay:-4.5s}
+.compact span{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--rose);opacity:.35}
+.compact span:nth-child(2){inset:9%;opacity:.5}
+.compact span:nth-child(3){inset:18%;background:var(--powder);border:0;opacity:1}
+.compact span:nth-child(4){inset:30%;background:var(--rose-soft);border:0;opacity:1}
 .compact b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.2}
 .compact b small{display:block;font-family:var(--body);font-size:15px;color:var(--muted)}
-@keyframes breathe{50%{transform:scale(1.04)}}
 
 section{padding-block:72px;border-top:1px solid var(--line)}
 .head{display:grid;gap:8px;margin-bottom:36px;max-width:640px}
@@ -62,7 +62,7 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .item h3{font-size:28px}
 .item .price{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .item p{grid-column:1/-1;color:var(--muted);font-size:16.5px}
-.item .dur{font-size:14px;font-weight:700;color:var(--rose);margin-inline-start:10px;font-family:var(--body)}
+.item .dur{font-size:14px;font-weight:600;color:var(--rose);margin-inline-start:10px;font-family:var(--body)}
 
 .slot{border:2px dashed var(--line);border-radius:24px;padding:30px;max-width:760px;display:grid;gap:8px}
 .slot h2{font-size:clamp(32px,4vw,44px)}
@@ -79,7 +79,7 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .book{display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:start}
 .book > *{min-width:0}
 .stepper{display:grid;gap:26px}
-.stp h3{font-family:var(--body);font-weight:700;font-size:17px;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.stp h3{font-family:var(--body);font-weight:600;font-size:17px;margin-bottom:10px;display:flex;gap:10px;align-items:center}
 .stp h3 span{width:26px;height:26px;border-radius:50%;background:var(--rose-soft);color:var(--ink);display:grid;place-items:center;font-size:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font:600 16px/1.2 var(--body);padding:10px 16px;border-radius:999px;border:0;background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--control);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
@@ -95,12 +95,12 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .day:disabled{opacity:.4;cursor:not-allowed}
 .times{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
 .tm{font:600 15px/1 var(--body);font-variant-numeric:tabular-nums;padding:12px 0;border-radius:12px;border:0;background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--control);cursor:pointer;transition:transform .15s}
-.tm:hover:not(:disabled){transform:translateY(-2px)}
+.tm:hover:not(:disabled){box-shadow:inset 0 0 0 1.5px var(--ink)}
 .tm:disabled{background:transparent;color:var(--muted);text-decoration:line-through;box-shadow:inset 0 0 0 1px var(--line);opacity:.55;cursor:not-allowed}
 .tm[aria-pressed="true"]{background:var(--rose);color:var(--on-rose);box-shadow:none}
 .legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:10px}
 .field{display:grid;gap:4px;max-width:320px}
-.field label{font-size:15px;font-weight:700}
+.field label{font-size:15px;font-weight:600}
 .field input:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
 .field input{font:inherit;padding:11px 14px;border-radius:12px;border:1.5px solid var(--control);background:var(--surface);color:var(--ink)}
 .summary{background:var(--surface);border-radius:28px;padding:24px;box-shadow:0 30px 60px -40px rgba(58,20,32,.5);border:1px solid var(--line);position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);display:grid;gap:14px}
@@ -111,8 +111,8 @@ section{padding-block:72px;border-top:1px solid var(--line)}
 .pill:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .summary .pill{width:100%;justify-content:center}
 .held{display:grid;gap:12px;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
-.held .ok{color:var(--ok);font-weight:700;display:flex;gap:8px;align-items:center}
-.held .clock{font-variant-numeric:tabular-nums;font-weight:700;direction:ltr;display:inline-block}
+.held .ok{color:var(--ok);font-weight:600;display:flex;gap:8px;align-items:center}
+.held .clock{font-variant-numeric:tabular-nums;font-weight:600;direction:ltr;display:inline-block}
 .bubble{background:#DCF8C6;color:#1B2A1E;border-radius:16px 4px 16px 16px;padding:12px 14px;font-size:15.5px;line-height:1.55}
 .linkish{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;justify-self:center}
 .hint{font-size:14px;color:var(--muted)}
@@ -140,7 +140,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 
 /* accessibility helpers */
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:700 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
+.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:600 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
 .skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
 .motion-btn{position:fixed;z-index:60;inset-inline-end:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:6px;background:Canvas;color:CanvasText;border:1.5px solid CanvasText;border-radius:999px;padding:7px 12px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;opacity:.88;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
 .motion-btn:hover,.motion-btn:focus-visible{opacity:1}
@@ -156,7 +156,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 .a11y-dialog p,.a11y-dialog ul{margin:0}
 .a11y-dialog ul{padding-inline-start:20px}
 .a11y-dialog .upd{margin-top:16px;font-size:14px;opacity:.8}
-.a11y-dialog .close{margin-top:20px;font:700 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
+.a11y-dialog .close{margin-top:20px;font:600 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
 </style>
 </head>
 <body style="margin:0">
@@ -186,7 +186,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
 
   <main id="main">
   <section id="menu">
-    <div class="head"><p class="kicker">תפריט טיפולים</p><h2>מה עושים אצלי</h2><p>בפגישה הראשונה אני בודקת את העור ומתאימה את הטיפול. אפשר לשנות טיפול גם ביום עצמו. המחירים כוללים מע״מ.</p></div>
+    <div class="head"><h2>מה עושים אצלי</h2><p>בפגישה הראשונה אני בודקת את העור ומתאימה את הטיפול. אפשר לשנות טיפול גם ביום עצמו. המחירים כוללים מע״מ.</p></div>
     <div class="menu">
       <div class="item"><h3>טיפול פנים קלאסי<span class="dur">75 דק׳</span></h3><span class="price">₪320</span><p>ניקוי, פילינג עדין, הוצאת שחורים, מסכה ועיסוי פנים.</p></div>
       <div class="item"><h3>ניקוי עמוק<span class="dur">90 דק׳</span></h3><span class="price">₪380</span><p>לעור שמן או עם נטייה לפצעונים. כולל אדים ומסכת חימר.</p></div>
@@ -196,7 +196,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   </section>
 
   <section>
-    <div class="head"><p class="kicker">מטופלות מספרות</p><h2>מה אומרות אחרי הטיפול</h2><p class="sample">ביקורות לדוגמה</p></div>
+    <div class="head"><h2>מה אומרות אחרי הטיפול</h2><p class="sample">ביקורות לדוגמה</p></div>
     <div class="rvs">
       <figure class="rv"><blockquote>יש לי עור רגיש שמאדים מכל דבר. זו הפעם הראשונה שיצאתי מטיפול פנים בלי כתמים אדומים.</blockquote><figcaption><b>שירה ל.</b> · טיפול לעור רגיש</figcaption></figure>
       <figure class="rv"><blockquote>אין חדר המתנה ואין מוזיקה רועשת. שעה וחצי של שקט, והיא לא ניסתה למכור לי אף קרם.</blockquote><figcaption><b>יעל מ.</b> · ניקוי עמוק</figcaption></figure>
@@ -205,7 +205,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   </section>
 
   <section id="book">
-    <div class="head"><p class="kicker">קביעת תור</p><h2>בוחרים שעה ומשריינים</h2><p>רואים אילו שעות פנויות, משריינים תור ל-15 דקות, ושולחים לי הודעה לאישור.</p></div>
+    <div class="head"><h2>בוחרים שעה ומשריינים</h2><p>רואים אילו שעות פנויות, משריינים תור ל-15 דקות, ושולחים לי הודעה לאישור.</p></div>
     <div class="book">
       <div class="stepper">
         <div class="stp"><h3><span>1</span>טיפול</h3><div class="chips" id="tChips"></div></div>
@@ -219,7 +219,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px;border-top:1px
   </section>
 
   <section>
-    <div class="head"><p class="kicker">אחרי הטיפול</p><h2>מה עושים ב-48 השעות הבאות</h2></div>
+    <div class="head"><h2>מה עושים ב-48 השעות הבאות</h2></div>
     <div class="after">
       <div><b>בלי איפור</b><p>לפחות 12 שעות. העור פתוח ונושם.</p></div>
       <div><b>קרם הגנה</b><p>גם ביום מעונן, ובמיוחד אחרי פילינג.</p></div>

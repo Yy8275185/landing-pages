@@ -32,7 +32,7 @@ p{margin:0}
 
 nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;border-bottom:4px solid var(--ink)}
 .brand{font-family:var(--display);font-size:40px;line-height:1}
-.btn{display:inline-flex;align-items:center;gap:8px;font:800 17px/1 var(--body);text-decoration:none;padding:15px 24px;border-radius:4px;border:0;cursor:pointer;transition:transform .15s}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 17px/1 var(--body);text-decoration:none;padding:15px 24px;border-radius:4px;border:0;cursor:pointer;transition:transform .15s}
 .btn:active{transform:scale(.97)}
 .btn.blue{background:var(--blue);color:var(--on-blue)}
 .btn.line{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);background:transparent}
@@ -49,10 +49,10 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .timer .clock.work{color:var(--lane)}
 .timer .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
 .timer .bar i{display:block;height:100%;background:var(--red);width:100%;transform-origin:right;transition:transform 1s linear}
-.timer .set{font-weight:800;text-align:center;font-size:17px}
+.timer .set{font-weight:600;text-align:center;font-size:17px}
 
-.lanes{height:14px;background:repeating-linear-gradient(90deg,var(--lane) 0 60px,transparent 60px 90px);animation:run 3s linear infinite;opacity:.9}
-@keyframes run{to{background-position:-90px 0}}
+.lanes{height:14px;background:repeating-linear-gradient(90deg,var(--lane) 0 60px,transparent 60px 90px);opacity:.9}
+}
 
 section{padding-block:72px}
 .head{display:grid;gap:10px;margin-bottom:34px;max-width:680px}
@@ -70,7 +70,7 @@ section{padding-block:72px}
 .planner{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
 .planner > *{min-width:0}
 .ctl{display:grid;gap:22px}
-.ctl legend{font-weight:800;margin-bottom:8px;padding:0}
+.ctl legend{font-weight:600;margin-bottom:8px;padding:0}
 fieldset{border:0;margin:0;padding:0}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg input{position:absolute;opacity:0;pointer-events:none}
@@ -81,7 +81,7 @@ fieldset{border:0;margin:0;padding:0}
 .day{background:var(--surface);border:1px solid var(--line);border-radius:6px;min-height:150px;padding:10px 8px;display:flex;flex-direction:column;gap:6px;transition:background .3s,border-color .3s;min-width:0}
 .day b{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
 .day.on{background:var(--blue-soft);border-color:var(--blue)}
-.day .ses{font-weight:800;font-size:15px;line-height:1.25;animation:in .4s cubic-bezier(.2,1.2,.4,1) backwards}
+.day .ses{font-weight:600;font-size:15px;line-height:1.25;animation:in .4s cubic-bezier(.2,1.2,.4,1) backwards}
 .day .min{font-family:var(--mono);font-size:12px;color:var(--blue)}
 .day.rest .ses{color:var(--muted);font-weight:600}
 @keyframes in{from{transform:translateY(8px) scale(.96)}}
@@ -89,8 +89,8 @@ fieldset{border:0;margin:0;padding:0}
 
 /* prices */
 .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.pr{background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:24px;display:grid;gap:6px;transition:transform .2s,box-shadow .2s}
-.pr:hover{transform:translate(4px,-4px);box-shadow:-8px 8px 0 var(--ink)}
+.pr{background:var(--surface);border:2px solid var(--ink);border-radius:6px;padding:24px;display:grid;gap:6px;transition:box-shadow .2s ease-out}
+.pr:hover{box-shadow:-8px 8px 0 var(--ink)}
 .pr h3{font-size:44px}
 .pr .n{font-family:var(--display);font-size:72px;line-height:.9;color:var(--blue)}
 .pr p{color:var(--muted);font-size:16px}
@@ -152,7 +152,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
   <header class="hero">
     <div>
       <p class="tag">אימון אישי ואימון זוגי</p>
-      <h1>מאמן אישי<br><em>בתל אביב.</em></h1>
+      <h1>מאמן אישי<br><em>בתל אביב</em></h1>
       <p class="lede">אימונים של 50 דקות בפארק הירקון או אצלכם בסלון, בלי מנוי לחדר כושר. את הציוד אני מביא, ואתם צריכים רק מים ונעליים.</p>
       <div class="row">
         <a class="btn blue" href="https://wa.me/972500000000" target="_blank" rel="noopener">לקבוע אימון ניסיון</a>

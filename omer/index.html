@@ -35,9 +35,10 @@ p{margin:0}
 nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
 .brand{font-family:var(--display);font-size:28px;display:flex;align-items:baseline;gap:10px}
 .brand small{font-family:var(--hand);font-size:16px;color:var(--muted)}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--on-btn);text-decoration:none;border-radius:6px;padding:15px 24px;font:700 17px/1 var(--body);box-shadow:4px 4px 0 var(--oak);transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--oak)}
-.btn b{direction:ltr;unicode-bidi:isolate;font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--on-btn);text-decoration:none;border-radius:6px;padding:15px 24px;font:600 17px/1 var(--body);box-shadow:4px 4px 0 var(--oak);transition:box-shadow .2s ease-out,transform .1s ease-out}
+.btn:hover{box-shadow:6px 6px 0 var(--oak)}
+.btn:active{transform:scale(.98)}
+.btn b{direction:ltr;unicode-bidi:isolate;font-weight:600}
 
 /* hero */
 .hero{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center;padding-block:24px 70px}
@@ -90,7 +91,7 @@ section{padding-block:72px}
 .rvs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .rv{margin:0;background:var(--surface);border:1.5px solid var(--ink);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .rv blockquote{margin:0}
-.rv figcaption{margin-top:auto;font-weight:700}
+.rv figcaption{margin-top:auto;font-weight:600}
 .rv figcaption span{display:block;font-family:var(--hand);font-weight:400;color:var(--muted);font-size:15px}
 .sample{font-size:14px;color:var(--muted)}
 
@@ -108,7 +109,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 
 /* accessibility helpers */
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:700 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
+.skip{position:fixed;top:-80px;inset-inline-start:max(12px,env(safe-area-inset-right,0px));z-index:100;background:Canvas;color:CanvasText;border:2px solid CanvasText;border-radius:8px;padding:10px 16px;font:600 16px/1.2 system-ui,sans-serif;text-decoration:none;transition:top .15s}
 .skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
 .motion-btn{position:fixed;z-index:60;inset-inline-end:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:6px;background:Canvas;color:CanvasText;border:1.5px solid CanvasText;border-radius:999px;padding:7px 12px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;opacity:.88;box-shadow:0 6px 18px -8px rgba(0,0,0,.45)}
 .motion-btn:hover,.motion-btn:focus-visible{opacity:1}
@@ -124,7 +125,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 .a11y-dialog p,.a11y-dialog ul{margin:0}
 .a11y-dialog ul{padding-inline-start:20px}
 .a11y-dialog .upd{margin-top:16px;font-size:14px;opacity:.8}
-.a11y-dialog .close{margin-top:20px;font:700 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
+.a11y-dialog .close{margin-top:20px;font:600 16px/1 inherit;padding:12px 20px;border-radius:10px;border:1.5px solid CanvasText;background:CanvasText;color:Canvas;cursor:pointer}
 </style>
 </head>
 <body style="margin:0">
@@ -141,7 +142,7 @@ footer{padding-block:30px 100px;color:var(--muted);font-size:14px}
 
   <header class="hero">
     <div>
-      <h1>נגר רהיטים בהזמנה בתל אביב. <span>רואים את הרהיט לפני שבונים אותו.</span></h1>
+      <h1>נגר רהיטים בהזמנה בתל אביב. <span>רואים את הרהיט לפני שבונים אותו</span></h1>
       <p class="lede">יש לכם פינה ששום רהיט מהחנות לא נכנס אליה? עומר מגיע, מודד אותה כמו שהיא באמת, ומשרטט ביד את הרהיט בתוך החדר שלכם. רק כשהשרטוט נראה לכם בדיוק נכון, מתחילים לבנות.</p>
       <div class="cta">
         <a class="btn" href="tel:0500000000">לתאם מדידה בבית <b>050-000-0000</b></a>
